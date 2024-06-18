@@ -1,6 +1,6 @@
 import "./Carousel.scss";
 
-export function Carousel() {
+export default function Carousel() {
   return (
     <>
       <div className="carousel">

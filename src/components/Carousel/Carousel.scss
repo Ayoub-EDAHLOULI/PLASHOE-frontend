@@ -17,6 +17,7 @@
       font-family: var(--font-primary);
       white-space: nowrap;
       padding: 0 5rem;
+      font-weight: var(--font-medium);
 
       &::before {
         content: "🚀";
