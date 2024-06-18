@@ -1,23 +1,21 @@
 // src/InfiniteText.scss
 .infinite-text-container {
   overflow: hidden;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  min-width: 100%;
   margin: 150px 0;
-  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--primary-color-light);
+  border-bottom: 1px solid var(--primary-color-light);
 
   .infinite-text {
     display: flex;
-    justify-content: center;
     align-items: center;
-    animation: scroll 300s linear infinite;
+    animation: scroll 80s linear infinite;
 
     span {
-      font-size: 10rem;
+      font-size: 8rem;
       font-weight: bold;
-      margin: 0 150px;
+      margin: 0 130px;
       text-transform: uppercase;
       letter-spacing: 5px;
       white-space: nowrap;
@@ -36,7 +34,7 @@
         transform: translateX(0%);
       }
       100% {
-        transform: translateX(-100%);
+        transform: translateX(-1000%);
       }
     }
   }

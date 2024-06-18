@@ -17,6 +17,17 @@ const InfiniteText = () => {
         <span className="odd">Mastery is a never-ending exploration</span>
         <span className="even">Mastery is a never-ending exploration</span>
         <span className="odd">Mastery is a never-ending exploration</span>
+        <span className="even">Mastery is a never-ending exploration</span>
+        <span className="odd">Mastery is a never-ending exploration</span>
+        <span className="even">Mastery is a never-ending exploration</span>
+        <span className="odd">Mastery is a never-ending exploration</span>
+        <span className="even">Mastery is a never-ending exploration</span>
+        <span className="odd">Mastery is a never-ending exploration</span>
+        <span className="even">Mastery is a never-ending exploration</span>
+        <span className="odd">Mastery is a never-ending exploration</span>
+        <span className="even">Mastery is a never-ending exploration</span>
+        <span className="odd">Mastery is a never-ending exploration</span>
+        <span className="even">Mastery is a never-ending exploration</span>
       </div>
     </div>
   );
