@@ -1,0 +1,36 @@
+.carousel {
+  overflow: hidden;
+  background-color: var(--black-color);
+  position: relative;
+  width: 100%;
+
+  .carousel_container {
+    color: var(--white-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 6vh;
+    animation: move-rtl 19s linear infinite;
+
+    h6 {
+      font-size: 11.5px;
+      font-family: var(--font-primary);
+      white-space: nowrap;
+      padding: 0 5rem;
+
+      &::before {
+        content: "🚀";
+        margin-right: 0.5rem;
+      }
+    }
+
+    @keyframes move-rtl {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+  }
+}
