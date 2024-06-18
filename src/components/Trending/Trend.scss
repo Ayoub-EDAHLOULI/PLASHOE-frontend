@@ -1,0 +1,91 @@
+.trend {
+  margin: var(--space-mg-xy);
+
+  .trend_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
+
+    .trend_top_side {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .trend_title {
+        h2 {
+          font-size: 50px;
+          font-weight: 600;
+          color: var(--black-color);
+          letter-spacing: 1px;
+        }
+      }
+
+      .all_products {
+        display: flex;
+        align-items: center;
+        column-gap: 5px;
+        cursor: pointer;
+
+        a {
+          font-size: 15px;
+          font-weight: 500;
+          color: var(--black-color);
+          letter-spacing: 1px;
+          font-family: var(--font-secondary);
+        }
+
+        i {
+          font-size: 15px;
+          color: var(--black-color);
+        }
+      }
+    }
+
+    .trend_bottom_side {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+
+      .card_one,
+      .card_two {
+        width: 48%;
+        height: 380px;
+        background: url("../../assets/trend1.jpg") no-repeat center center/cover;
+        cursor: pointer;
+
+        .card_one_title {
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: end;
+          transition: all 0.4s ease-in-out;
+
+          h3 {
+            width: 100%;
+            height: 8vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 25px;
+            font-weight: 600;
+            color: var(--white-color);
+            letter-spacing: 1px;
+            background: rgba(0, 0, 0, 0.5);
+          }
+        }
+
+        &:hover {
+          .card_one_title {
+            background: rgba(0, 0, 0, 0.1);
+          }
+        }
+      }
+
+      .card_two {
+        background: url("../../assets/trend2.jpg") no-repeat center center/cover;
+      }
+    }
+  }
+}

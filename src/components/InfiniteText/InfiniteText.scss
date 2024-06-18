@@ -1,11 +1,10 @@
-// src/InfiniteText.scss
 .infinite-text-container {
   overflow: hidden;
   min-width: 100%;
-  margin: 150px 0;
+  margin: var(--space-mg);
   overflow: hidden;
-  border-top: 1px solid var(--primary-color-light);
-  border-bottom: 1px solid var(--primary-color-light);
+  border-top: 1px solid rgba(70, 78, 52, 0.2);
+  border-bottom: 1px solid rgba(70, 78, 52, 0.2);
 
   .infinite-text {
     display: flex;

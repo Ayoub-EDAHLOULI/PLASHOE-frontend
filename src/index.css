@@ -48,6 +48,8 @@
   --space-lg: 2rem;
   --space-xl: 3rem;
   --space-xxl: 4rem;
+  --space-mg: 150px 0;
+  --space-mg-xy: 150px;
 }
 
 * {
