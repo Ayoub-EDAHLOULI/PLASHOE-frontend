@@ -1,11 +1,11 @@
-.login {
+.register {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   background-color: #f5f5f5;
 
-  .login_container {
+  .register_container {
     width: 100%;
     max-width: 600px;
     height: 500px;
@@ -38,11 +38,12 @@
         border: 1px solid #e7e7e7;
         border-radius: 5px;
         font-size: 1.1rem;
+        font-family: var(--font-secondary);
         outline: none;
 
         &::placeholder {
           width: 100%;
-          font-size: 1rem;
+          font-size: 15px;
           color: #818181;
           font-family: var(--font-secondary);
         }
@@ -67,7 +68,7 @@
           &::after {
             content: "";
             display: block;
-            width: 5%;
+            width: 10px;
             height: 1.7px;
             background-color: #969696;
             transition: width 0.3s;
@@ -79,7 +80,7 @@
                 width: 0;
               }
               100% {
-                width: 30%;
+                width: 36%;
               }
             }
           }
@@ -94,7 +95,7 @@
         border-radius: 5px;
         background-color: var(--primary-color);
         color: var(--white-color);
-        font-size: 1.1rem;
+        font-size: 1rem;
         font-weight: 400;
         cursor: pointer;
         transition: background-color 0.3s;
