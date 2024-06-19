@@ -1,6 +1,7 @@
 import AboutUs from "../components/About Us/AboutUs";
 import Categories from "../components/Categories/Categories";
 import Companies from "../components/Companies/Companies";
+import DiscountBanner from "../components/Discount Banner/DiscountBanner";
 import Hero from "../components/Hero/Hero";
 import InfiniteText from "../components/InfiniteText/InfiniteText";
 import NewArival from "../components/New Arrival/NewArival";
@@ -16,6 +17,7 @@ export const Home = () => {
       <Categories />
       <Trend />
       <NewArival />
+      <DiscountBanner />
     </>
   );
 };
