@@ -1,0 +1,91 @@
+.footer {
+  width: 100%;
+  height: 50vh;
+  margin: var(--spacing-4) 0;
+  padding: var(--spacing-4) 0;
+  background-color: var(--primary-color);
+
+  .footer__container {
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0 var(--spacing-4);
+
+    .footer__content {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+
+      .footerOne,
+      .footerTwo,
+      .footerThree,
+      .footerFour {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        margin: var(--spacing-4) 0;
+
+        h2 {
+          font-size: 1.4rem;
+          margin-bottom: var(--space-xs);
+          color: var(--white-color);
+          font-weight: var(--font-medium);
+          margin-bottom: var(--space-sm);
+        }
+
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          text-align: start;
+
+          li {
+            margin-bottom: var(--space-xs);
+
+            a {
+              text-decoration: none;
+              color: var(--grey-color);
+              font-size: 1rem;
+              font-weight: 400;
+              transition: all 0.3s;
+            }
+          }
+        }
+
+        .email {
+          display: flex;
+          align-items: center;
+          margin: var(--space-xs) 0;
+
+          input {
+            width: 100%;
+            padding: 15px 15px 12px 0px;
+            margin: var(--space-xs) 0;
+            transition: all 0.3s;
+            outline: none;
+            border: none;
+            border-bottom: 1px solid var(--white-color);
+            background-color: transparent;
+            color: var(--white-color);
+
+            &::placeholder {
+              color: var(--grey-color-light);
+              letter-spacing: 1px;
+            }
+          }
+
+          i {
+            color: var(--white-color);
+            font-size: 1.5rem;
+            margin-left: var(--space-xs);
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

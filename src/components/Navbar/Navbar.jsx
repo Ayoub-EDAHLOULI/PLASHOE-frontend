@@ -36,6 +36,7 @@ export default function Navbar() {
 
           <div className="navbar__icons">
             <i className="fas fa-search"></i>
+            <i className="fas fa-user"></i>
             <i className="fas fa-shopping-cart"></i>
           </div>
         </div>
