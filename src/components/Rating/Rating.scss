@@ -1,0 +1,103 @@
+.rating {
+  width: 100%;
+
+  .rating__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+
+    .rating__container__title {
+      margin-bottom: 1rem;
+
+      h1 {
+        font-size: 2.5rem;
+        font-weight: 500;
+        color: #333;
+        letter-spacing: 1.2px;
+      }
+    }
+
+    .rating__container__content {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 2rem 1rem 10rem 1rem;
+
+      .ratingOne,
+      .ratingTwo,
+      .ratingThree {
+        border: 1px solid #e0e0e0;
+        padding: 2rem;
+        border-radius: 10px;
+        margin: 0 1rem;
+        background-color: #e0e0e0;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        .content {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
+
+          .content__stars {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1rem;
+
+            i {
+              color: #f1c40f;
+              margin-right: 1px;
+            }
+          }
+
+          .content__text {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #333;
+            letter-spacing: 1.2px;
+            text-align: start;
+          }
+
+          .content__info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1rem;
+
+            .imageOne,
+            .imageTwo,
+            .imageThree {
+              width: 25px;
+              height: 25px;
+              border-radius: 50%;
+              margin-right: 0.6rem;
+              background: url("../../assets/RatingOne.jpg") no-repeat
+                center/cover;
+            }
+
+            .imageTwo {
+              background: url("../../assets/RatingTwo.jpg") no-repeat
+                center/cover;
+            }
+
+            .imageThree {
+              background: url("../../assets/RatingThree.jpg") no-repeat
+                center/cover;
+            }
+
+            h1 {
+              font-size: 0.8rem;
+              font-weight: 400;
+              color: #333;
+              letter-spacing: 1.2px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
