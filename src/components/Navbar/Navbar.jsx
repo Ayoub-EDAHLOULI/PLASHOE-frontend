@@ -1,4 +1,5 @@
 import "./Navbar.scss";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
@@ -35,9 +36,11 @@ export default function Navbar() {
           </div>
 
           <div className="navbar__icons">
-            <i className="fas fa-search"></i>
-            <i className="fas fa-user"></i>
-            <i className="fas fa-shopping-cart"></i>
+            <i className="fas fa-search" />
+            <Link to="/login">
+              <i className="fas fa-user" />
+            </Link>
+            <i className="fas fa-shopping-cart" />
           </div>
         </div>
       </div>
