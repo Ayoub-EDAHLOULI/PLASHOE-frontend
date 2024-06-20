@@ -56,6 +56,10 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+
+  /* Scroll Bar Styles For FireFox*/
+  scrollbar-width: thin; /* "auto" or "thin" */
+  scroll-behavior: smooth;
 }
 
 body {
