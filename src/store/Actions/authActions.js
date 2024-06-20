@@ -55,10 +55,6 @@ export const login = (email, password) => async (dispatch) => {
 
     const data = await res.json();
 
-    console.log(data);
-    console.log("Token", data.data.token);
-    console.log("Success", data.success);
-
     dispatch({
       type: LOGIN_SUCCESS,
       payload: data.data.token,

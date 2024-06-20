@@ -1,7 +1,19 @@
 import "./Navbar.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 export default function Navbar() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Dispatch Logout Action
+    dispatch({ type: "LOGOUT" });
+
+    // Redirect to Home Page
+    navigate("/");
+  };
+
   return (
     <>
       <div className="navbar">
@@ -37,9 +49,19 @@ export default function Navbar() {
 
           <div className="navbar__icons">
             <i className="fas fa-search" />
-            <Link to="/login">
-              <i className="fas fa-user" />
-            </Link>
+            {localStorage.getItem("token") ? (
+              <Link to="/" className="logout-container">
+                <i
+                  className="fa-solid fa-arrow-right-from-bracket logout"
+                  onClick={handleLogout}
+                />
+                <span className="logout-text">Logout</span>
+              </Link>
+            ) : (
+              <Link to="/login">
+                <i className="fas fa-user" />
+              </Link>
+            )}
             <i className="fas fa-shopping-cart" />
           </div>
         </div>

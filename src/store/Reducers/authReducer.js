@@ -29,7 +29,6 @@ const authReducer = (state = initialState, action) => {
       };
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
-      console.log("Storing token in localStorage:", action.payload);
       localStorage.setItem("token", action.payload);
       localStorage.setItem("isAuthenticated", true);
       return {
@@ -40,7 +39,6 @@ const authReducer = (state = initialState, action) => {
       };
     case REGISTER_FAIL:
     case LOGIN_FAIL:
-      console.log("Removing token from localStorage");
       localStorage.removeItem("token");
       localStorage.removeItem("isAuthenticated");
       return {
@@ -52,6 +50,7 @@ const authReducer = (state = initialState, action) => {
       };
     case LOGOUT:
       localStorage.removeItem("token");
+      localStorage.removeItem("isAuthenticated");
       return {
         ...state,
         token: null,
