@@ -2,8 +2,20 @@ import "./Register.scss";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { register } from "../../../store/Actions/authActions";
+import { ToastContainer } from "react-toastify";
+import { useContext } from "react";
+import { ToastContext } from "../../../context/ToastContext";
 
 function Register() {
+  // Redux Logic
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+
+  // Toast Context
+  const { addToast } = useContext(ToastContext);
+
   // Formik Logic
   const formik = useFormik({
     initialValues: {
@@ -31,11 +43,22 @@ function Register() {
     },
   });
 
-  console.log("formik errors", formik.errors);
-
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Validate form
+    if (!formik.isValid) {
+      return addToast("Please fill out the form correctly", "error");
+    }
+
+    // Dispatch register action
+    dispatch(
+      register(formik.values.name, formik.values.email, formik.values.password)
+    );
+
+    // Reset form after submission
+    formik.resetForm();
   };
 
   return (
@@ -85,6 +108,20 @@ function Register() {
           <button type="submit">Create account</button>
           <Link to="/login"> Already have an account? </Link>
         </form>
+
+        <ToastContainer />
+        {
+          // Display error message if there is an error
+          auth.error && addToast(auth.error, "error")
+        }
+        {
+          // Display success message if registration is successful
+          auth.isAuthenticated && addToast("Registration successful", "success")
+        }
+        {
+          // Display loading message if registration is in progress
+          auth.loading && addToast("Loading...", "info")
+        }
       </div>
     </div>
   );
