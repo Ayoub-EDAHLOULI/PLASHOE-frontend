@@ -8,6 +8,7 @@ import Footer from "./components/Footer/Footer";
 import Login from "./pages/Auth/Login/Login";
 import Register from "./pages/Auth/Register/Register";
 import RecoverPassword from "./pages/Auth/Recover password/RecoverPassword";
+import About from "./pages/About/About";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<RecoverPassword />} />
+          <Route path="/about" element={<About />} />
         </Routes>
         <Footer />
       </div>

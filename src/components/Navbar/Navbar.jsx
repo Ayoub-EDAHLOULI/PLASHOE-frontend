@@ -24,7 +24,7 @@ export default function Navbar() {
           <div className="navbar__menu">
             <ul>
               <li>
-                <a href="/">Home</a>
+                <Link to="/">Home</Link>
               </li>
               <li>
                 <a href="/">Men</a>
@@ -39,7 +39,7 @@ export default function Navbar() {
                 <a href="/">Lookbrok</a>
               </li>
               <li>
-                <a href="/">About</a>
+                <Link to="/about">About</Link>
               </li>
               <li>
                 <a href="/">Contact</a>
