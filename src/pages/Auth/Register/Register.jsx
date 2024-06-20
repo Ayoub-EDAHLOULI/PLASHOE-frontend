@@ -5,8 +5,9 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../../store/Actions/authActions";
 import { ToastContainer } from "react-toastify";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ToastContext } from "../../../context/ToastContext";
+import "react-toastify/dist/ReactToastify.css"; // Import CSS for Toastify
 
 function Register() {
   // Redux Logic
@@ -39,33 +40,26 @@ function Register() {
 
     // Schema for form submission
     onSubmit: (values) => {
-      console.log("values", values);
+      dispatch(register(values.name, values.email, values.password));
+
+      // Reset form after submission
+      formik.resetForm();
     },
   });
 
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Validate form
-    if (!formik.isValid) {
-      return addToast("Please fill out the form correctly", "error");
+  useEffect(() => {
+    if (auth.error) {
+      addToast(auth.error, "error");
+    } else if (auth.isAuthenticated) {
+      addToast("User created successfully", "success");
     }
-
-    // Dispatch register action
-    dispatch(
-      register(formik.values.name, formik.values.email, formik.values.password)
-    );
-
-    // Reset form after submission
-    formik.resetForm();
-  };
+  }, [auth, addToast]);
 
   return (
     <div className="register">
       <div className="register_container">
         <h1>Sign Up</h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={formik.handleSubmit}>
           <div className="labelError">
             {formik.touched.name && formik.errors.name ? (
               <p>{formik.errors.name}</p>
@@ -108,20 +102,7 @@ function Register() {
           <button type="submit">Create account</button>
           <Link to="/login"> Already have an account? </Link>
         </form>
-
         <ToastContainer />
-        {
-          // Display error message if there is an error
-          auth.error && addToast(auth.error, "error")
-        }
-        {
-          // Display success message if registration is successful
-          auth.isAuthenticated && addToast("Registration successful", "success")
-        }
-        {
-          // Display loading message if registration is in progress
-          auth.loading && addToast("Loading...", "info")
-        }
       </div>
     </div>
   );
