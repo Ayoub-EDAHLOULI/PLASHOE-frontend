@@ -1,9 +1,19 @@
 import "./Login.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../../store/Actions/authActions";
+import { useEffect } from "react";
 
 function Login() {
+  // Redux Logic
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+
+  // React Router Navigate
+  const navigate = useNavigate();
+
   // Formik Logic
   const formik = useFormik({
     initialValues: {
@@ -23,22 +33,26 @@ function Login() {
 
     // Schema for form submission
     onSubmit: (values) => {
-      console.log("values", values);
+      dispatch(login(values.email, values.password));
+
+      // Reset form after submission
+      formik.resetForm();
     },
   });
 
-  console.log("formik errors", formik.errors);
-
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  useEffect(() => {
+    if (auth.error) {
+      alert(auth.error);
+    } else if (auth.isAuthenticated) {
+      navigate("/");
+    }
+  }, [auth, navigate]);
 
   return (
     <div className="login">
       <div className="login_container">
         <h1>Sign In</h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={formik.handleSubmit}>
           <div className="labelError">
             {formik.touched.email && formik.errors.email ? (
               <p>{formik.errors.email}</p>
