@@ -250,5 +250,99 @@
         }
       }
     }
+
+    .about__newsletter {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 6rem;
+
+      .about__newsletter__container {
+        width: 93%;
+        height: 65vh;
+        border-radius: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+
+        .Image {
+          width: 50%;
+          height: 100%;
+          background: url("../../assets/Newsletter.jpg") no-repeat center
+            center/cover;
+          border-top-left-radius: 20px;
+          border-bottom-left-radius: 20px;
+        }
+
+        .about__newsletter__content {
+          width: 50%;
+          height: 100%;
+          background: linear-gradient(
+            90deg,
+            #964707 0%,
+            #fd7403 52%,
+            #e06f13 100%
+          );
+          border-top-right-radius: 20px;
+          border-bottom-right-radius: 20px;
+          padding: 45px 30px 60px 60px;
+          text-align: start;
+
+          h1 {
+            font-size: 2.5rem;
+            font-family: var(--font-secondary);
+            font-weight: 600;
+            color: var(--white-color);
+          }
+
+          p {
+            font-size: 1.2rem;
+            color: var(--white-color);
+            margin: 20px 0;
+          }
+
+          .about__newsletter__form {
+            display: flex;
+            flex-direction: column;
+            row-gap: 20px;
+
+            input {
+              width: 100%;
+              padding: 13px 15px 13px 18px;
+              border-radius: 5px;
+              border: 1px solid rgba(255, 255, 255, 0.3);
+              outline: none;
+              background: none;
+              color: var(--white-color);
+
+              &::placeholder {
+                color: rgba(255, 255, 255, 0.8);
+                font-size: 15px;
+                letter-spacing: 1px;
+              }
+            }
+
+            button {
+              width: 100%;
+              padding: 10px;
+              border-radius: 5px;
+              border: none;
+              outline: none;
+              background: var(--black-color);
+              color: var(--white-color);
+              font-weight: 600;
+              cursor: pointer;
+            }
+
+            h6 {
+              color: rgba(255, 255, 255, 0.8);
+              font-weight: 400;
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
   }
 }

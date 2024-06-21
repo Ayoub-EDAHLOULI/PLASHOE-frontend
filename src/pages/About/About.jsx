@@ -113,6 +113,29 @@ function About() {
 
         {/* Infinity Text Section */}
         <InfinityText text="Our History" />
+
+        {/* Newsletter Section */}
+        <div className="about__newsletter">
+          <div className="about__newsletter__container">
+            <div className="Image"></div>
+            <div className="about__newsletter__content">
+              <h1>@</h1>
+              <h1>Subscribe to our newsletter</h1>
+              <p>
+                Sign up for our newsletter to receive updates on new arrivals,
+                special offers, and other discount information.
+              </p>
+              <div className="about__newsletter__form">
+                <input type="email" placeholder="E-mail" />
+                <button>Subscribe</button>
+                <h6>
+                  By completing this form you are signing up to receive our
+                  emails and can unsubscribe at any time.
+                </h6>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
