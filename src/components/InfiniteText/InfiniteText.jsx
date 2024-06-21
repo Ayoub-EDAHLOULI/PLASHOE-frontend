@@ -1,33 +1,33 @@
 import "./InfiniteText.scss";
 
-const InfiniteText = () => {
+const InfiniteText = (prop) => {
   return (
     <div className="infinite-text-container">
       <div className="infinite-text">
-        <span className="odd">Mastery is a never-ending exploration</span>
-        <span className="even">Mastery is a never-ending exploration</span>
-        <span className="odd">Mastery is a never-ending exploration</span>
-        <span className="even">Mastery is a never-ending exploration</span>
-        <span className="odd">Mastery is a never-ending exploration</span>
-        <span className="even">Mastery is a never-ending exploration</span>
-        <span className="odd">Mastery is a never-ending exploration</span>
-        <span className="even">Mastery is a never-ending exploration</span>
-        <span className="odd">Mastery is a never-ending exploration</span>
-        <span className="even">Mastery is a never-ending exploration</span>
-        <span className="odd">Mastery is a never-ending exploration</span>
-        <span className="even">Mastery is a never-ending exploration</span>
-        <span className="odd">Mastery is a never-ending exploration</span>
-        <span className="even">Mastery is a never-ending exploration</span>
-        <span className="odd">Mastery is a never-ending exploration</span>
-        <span className="even">Mastery is a never-ending exploration</span>
-        <span className="odd">Mastery is a never-ending exploration</span>
-        <span className="even">Mastery is a never-ending exploration</span>
-        <span className="odd">Mastery is a never-ending exploration</span>
-        <span className="even">Mastery is a never-ending exploration</span>
-        <span className="odd">Mastery is a never-ending exploration</span>
-        <span className="even">Mastery is a never-ending exploration</span>
-        <span className="odd">Mastery is a never-ending exploration</span>
-        <span className="even">Mastery is a never-ending exploration</span>
+        <span className="odd">{prop.text}</span>
+        <span className="even">{prop.text}</span>
+        <span className="odd">{prop.text}</span>
+        <span className="even">{prop.text}</span>
+        <span className="odd">{prop.text}</span>
+        <span className="even">{prop.text}</span>
+        <span className="odd">{prop.text}</span>
+        <span className="even">{prop.text}</span>
+        <span className="odd">{prop.text}</span>
+        <span className="even">{prop.text}</span>
+        <span className="odd">{prop.text}</span>
+        <span className="even">{prop.text}</span>
+        <span className="odd">{prop.text}</span>
+        <span className="even">{prop.text}</span>
+        <span className="odd">{prop.text}</span>
+        <span className="even">{prop.text}</span>
+        <span className="odd">{prop.text}</span>
+        <span className="even">{prop.text}</span>
+        <span className="odd">{prop.text}</span>
+        <span className="even">{prop.text}</span>
+        <span className="odd">{prop.text}</span>
+        <span className="even">{prop.text}</span>
+        <span className="odd">{prop.text}</span>
+        <span className="even">{prop.text}</span>
       </div>
     </div>
   );

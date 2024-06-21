@@ -2,6 +2,7 @@ import "./About.scss";
 import Shoes_Video from "../../assets/Shoes_Video.mp4";
 import Shoes_Png from "../../assets/shoes.png";
 import ImageTextSlider from "../../components/ImageTextSlider/ImageTextSlider";
+import InfinityText from "../../components/InfiniteText/InfiniteText";
 
 function About() {
   return (
@@ -109,6 +110,9 @@ function About() {
 
         {/* ImageTextSlider Section */}
         <ImageTextSlider />
+
+        {/* Infinity Text Section */}
+        <InfinityText text="Our History" />
       </div>
     </div>
   );

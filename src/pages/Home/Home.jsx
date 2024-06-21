@@ -14,7 +14,7 @@ export const Home = () => {
       <Hero />
       <Companies />
       <AboutUs />
-      <InfiniteText />
+      <InfiniteText text="Mastery is a never-ending exploration" />
       <Categories />
       <Trend />
       <NewArival />
