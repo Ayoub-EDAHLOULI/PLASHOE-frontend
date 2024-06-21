@@ -3,6 +3,7 @@ import Shoes_Video from "../../assets/Shoes_Video.mp4";
 import Shoes_Png from "../../assets/shoes.png";
 import ImageTextSlider from "../../components/ImageTextSlider/ImageTextSlider";
 import InfinityText from "../../components/InfiniteText/InfiniteText";
+import Shipping from "../../components/Shipping/Shipping";
 
 function About() {
   return (
@@ -136,6 +137,9 @@ function About() {
             </div>
           </div>
         </div>
+
+        {/* Shipping Section */}
+        <Shipping />
       </div>
     </div>
   );
