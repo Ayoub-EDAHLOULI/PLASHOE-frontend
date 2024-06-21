@@ -1,6 +1,7 @@
 import "./About.scss";
 import Shoes_Video from "../../assets/Shoes_Video.mp4";
 import Shoes_Png from "../../assets/shoes.png";
+import ImageTextSlider from "../../components/ImageTextSlider/ImageTextSlider";
 
 function About() {
   return (
@@ -105,6 +106,9 @@ function About() {
             <h5>Ayoub Edahlouli __ Founder and CEO</h5>
           </div>
         </div>
+
+        {/* ImageTextSlider Section */}
+        <ImageTextSlider />
       </div>
     </div>
   );
