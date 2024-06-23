@@ -42,7 +42,7 @@ export default function Navbar() {
                 <Link to="/about">About</Link>
               </li>
               <li>
-                <a href="/">Contact</a>
+                <Link to="/contact-us">Contact</Link>
               </li>
             </ul>
           </div>

@@ -9,6 +9,8 @@ import Login from "./pages/Auth/Login/Login";
 import Register from "./pages/Auth/Register/Register";
 import RecoverPassword from "./pages/Auth/Recover password/RecoverPassword";
 import About from "./pages/About/About";
+import Shipping from "./components/Shipping/Shipping";
+import ContactUs from "./pages/ContactUs/ContactUs";
 
 function App() {
   return (
@@ -22,7 +24,9 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<RecoverPassword />} />
           <Route path="/about" element={<About />} />
+          <Route path="/contact-us" element={<ContactUs />} />
         </Routes>
+        <Shipping />
         <Footer />
       </div>
     </>
