@@ -1,4 +1,5 @@
 import "./AboutUs.scss";
+import { Link } from "react-router-dom";
 
 function AboutUs() {
   return (
@@ -25,7 +26,9 @@ function AboutUs() {
             quidem aliquid officia, fugiat doloribus aliquam alias nostrum a
             deleniti.0
           </p>
-          <button>Read More</button>
+          <Link to="/about">
+            <button>Read More</button>
+          </Link>
         </div>
       </div>
     </div>

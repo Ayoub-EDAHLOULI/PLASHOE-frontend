@@ -33,7 +33,7 @@ export default function Navbar() {
                 <a href="/">Women</a>
               </li>
               <li>
-                <a href="/">Collection</a>
+                <Link to="/collection">Collection</Link>
               </li>
               <li>
                 <a href="/">Lookbrok</a>
