@@ -14,8 +14,10 @@ import Shipping from "./components/Shipping/Shipping";
 import ContactUs from "./pages/ContactUs/ContactUs";
 import DisplayProducts from "./pages/DisplayProducts/DisplayProducts";
 import Products from "./pages/Products/Products";
+import Dashboard from "./pages/Dashboard/Dashboard";
 import { useEffect } from "react";
 import { checkAuthentication } from "./store/Actions/userActions";
+import { PrivateAdminRoute } from "./components/PrivateRoutes/PrivateAdminRoute";
 
 function App() {
   const dispatch = useDispatch();
@@ -41,6 +43,9 @@ function App() {
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/collection" element={<DisplayProducts />} />
         <Route path="/products" element={<Products />} />
+        <Route element={<PrivateAdminRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
       </Routes>
       <Shipping />
       <Footer />
