@@ -32,7 +32,9 @@ export default function Navbar() {
       <div className="navbar">
         <div className="navbar_container">
           <div className="navbar_logo">
-            <h2>PLASHOE</h2>
+            <Link to="/">
+              <h2>PLASHOE</h2>
+            </Link>
           </div>
           <div className="navbar__menu">
             <ul>
@@ -77,7 +79,7 @@ export default function Navbar() {
             )}
             <i className="fas fa-shopping-cart" />
             {isAuthenticated && user && user.role === "ADMIN" ? (
-              <Link to="/admin">
+              <Link to="/dashboard">
                 <i className="fas fa-user-cog" />
               </Link>
             ) : null}

@@ -1,61 +1,129 @@
 import "./Products.scss";
-import Product1 from "../../assets/Products/Men/product1.jpg";
-import ProductDescription from "../../components/ProductDescription/ProductDescription";
+import product1 from "../../assets/Products/Men/product1.jpg";
 
 function Products() {
   return (
     <div className="products">
       <div className="products__container">
-        <div className="product__content">
-          <div className="product__image">
-            <img src={Product1} alt="Product1" />
+        <div className="products__container__title">
+          <h1>Products</h1>
+        </div>
+        <div className="products__container__content__items">
+          <div className="content__item">
+            <img src={product1} alt="Product 1" />
+            <div className="item_infos">
+              <div className="item_info">
+                <div className="des">
+                  <span>Cara</span>
+                  <h5>Carton Astronaut T-Shirt</h5>
+                  <div className="star">
+                    <i className="fa-solid fa-star"></i>
+                    <i className="fa-solid fa-star"></i>
+                    <i className="fa-solid fa-star"></i>
+                    <i className="fa-solid fa-star"></i>
+                    <i className="fa-solid fa-star"></i>
+                  </div>
+                  <h4>$129</h4>
+                </div>
+                <a href="" className="cart">
+                  <i className="fa-solid fa-bag-shopping"></i>
+                </a>
+              </div>
+            </div>
           </div>
-          <div className="product__info">
-            <div className="product__tags">
-              <span>Sneaker & </span>
-              <span>Women</span>
-            </div>
-            <h2 className="product__name">Nike Air Max 270 React</h2>
-            <div className="product__price__rate">
-              <span className="product__price">$150</span>
-              <div className="product__rate">
-                <span className="product__rate">4.5</span>
-                <i className="fa-solid fa-star"></i>
+
+          <div className="content__item">
+            <img src={product1} alt="Product 1" />
+            <div className="item_infos">
+              <div className="item_info">
+                <div className="des">
+                  <span>Cara</span>
+                  <h5>Carton Astronaut T-Shirt</h5>
+                  <div className="star">
+                    <i className="fa-solid fa-star"></i>
+                    <i className="fa-solid fa-star"></i>
+                    <i className="fa-solid fa-star"></i>
+                    <i className="fa-solid fa-star"></i>
+                    <i className="fa-solid fa-star"></i>
+                  </div>
+                  <h4>$129</h4>
+                </div>
+                <a href="" className="cart">
+                  <i className="fa-solid fa-bag-shopping"></i>
+                </a>
               </div>
             </div>
-            <p className="product__description">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-              ultricies, turpis nec tincidunt interdum, elit mi ultrices odio,
-              eget tempor sapien nisl ut nunc.
-            </p>
-            <div className="product__quantity">
-              <span className="quantity__title">Quantity:</span>
-              <div className="quantity__buttons">
-                <button className="quantity__btn">-</button>
-                <span className="quantity__number">1</span>
-                <button className="quantity__btn">+</button>
+          </div>
+
+          <div className="content__item">
+            <img src={product1} alt="Product 1" />
+            <div className="item_infos">
+              <div className="item_info">
+                <div className="des">
+                  <span>Cara</span>
+                  <h5>Carton Astronaut T-Shirt</h5>
+                  <div className="star">
+                    <i className="fa-solid fa-star"></i>
+                    <i className="fa-solid fa-star"></i>
+                    <i className="fa-solid fa-star"></i>
+                    <i className="fa-solid fa-star"></i>
+                    <i className="fa-solid fa-star"></i>
+                  </div>
+                  <h4>$129</h4>
+                </div>
+                <a href="" className="cart">
+                  <i className="fa-solid fa-bag-shopping"></i>
+                </a>
               </div>
             </div>
-            <div className="in__stock">In Stock</div>
-            <div className="cards__buttons">
-              <button>Add to Cart</button>
-              <button>Buy Now</button>
-            </div>
-            <div className="product__shipping">
-              <div className="top__shipping">
-                <i className="fa-solid fa-truck-fast"></i>
-                <span>Fast Shipping</span>
+          </div>
+
+          <div className="content__item">
+            <img src={product1} alt="Product 1" />
+            <div className="item_infos">
+              <div className="item_info">
+                <div className="des">
+                  <span>Cara</span>
+                  <h5>Carton Astronaut T-Shirt</h5>
+                  <div className="star">
+                    <i className="fa-solid fa-star"></i>
+                    <i className="fa-solid fa-star"></i>
+                    <i className="fa-solid fa-star"></i>
+                    <i className="fa-solid fa-star"></i>
+                    <i className="fa-solid fa-star"></i>
+                  </div>
+                  <h4>$129</h4>
+                </div>
+                <a href="" className="cart">
+                  <i className="fa-solid fa-bag-shopping"></i>
+                </a>
               </div>
-              <div className="bottom__shipping">
-                <span>
-                  Place your order before 12:00pm and receive it by tomorrow
-                </span>
+            </div>
+          </div>
+
+          <div className="content__item">
+            <img src={product1} alt="Product 1" />
+            <div className="item_infos">
+              <div className="item_info">
+                <div className="des">
+                  <span>Cara</span>
+                  <h5>Carton Astronaut T-Shirt</h5>
+                  <div className="star">
+                    <i className="fa-solid fa-star"></i>
+                    <i className="fa-solid fa-star"></i>
+                    <i className="fa-solid fa-star"></i>
+                    <i className="fa-solid fa-star"></i>
+                    <i className="fa-solid fa-star"></i>
+                  </div>
+                  <h4>$129</h4>
+                </div>
+                <a href="" className="cart">
+                  <i className="fa-solid fa-bag-shopping"></i>
+                </a>
               </div>
             </div>
           </div>
         </div>
-
-        <ProductDescription />
       </div>
     </div>
   );

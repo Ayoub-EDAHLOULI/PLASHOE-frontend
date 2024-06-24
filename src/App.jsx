@@ -12,7 +12,7 @@ import RecoverPassword from "./pages/Auth/Recover password/RecoverPassword";
 import About from "./pages/About/About";
 import Shipping from "./components/Shipping/Shipping";
 import ContactUs from "./pages/ContactUs/ContactUs";
-import DisplayProducts from "./pages/DisplayProducts/DisplayProducts";
+import DisplayProduct from "./pages/DisplayProduct/DisplayProduct";
 import Products from "./pages/Products/Products";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import { useEffect } from "react";
@@ -41,8 +41,8 @@ function App() {
         <Route path="/forgot-password" element={<RecoverPassword />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact-us" element={<ContactUs />} />
-        <Route path="/collection" element={<DisplayProducts />} />
-        <Route path="/products" element={<Products />} />
+        <Route path="/collection" element={<Products />} />
+        <Route path="/products" element={<DisplayProduct />} />
         <Route element={<PrivateAdminRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
         </Route>
