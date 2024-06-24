@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../store/Actions/authActions";
+import { checkAuthentication } from "../../../store/Actions/userActions";
 import { useEffect } from "react";
 
 function Login() {
@@ -44,6 +45,7 @@ function Login() {
     if (auth.error) {
       alert(auth.error);
     } else if (auth.isAuthenticated) {
+      dispatch(checkAuthentication());
       navigate("/");
     }
   }, [auth, navigate]);
