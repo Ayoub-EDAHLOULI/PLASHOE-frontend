@@ -1,10 +1,23 @@
 import "./Navbar.scss";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 export default function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const user = useSelector((state) => state.user.user);
+  const isAuthenticated = localStorage.getItem("isAuthenticated");
+
+  useEffect(() => {
+    if (!user && localStorage.getItem("user")) {
+      dispatch({
+        type: "FETCH_USER_SUCCESS",
+        payload: JSON.parse(localStorage.getItem("user")),
+      });
+    }
+  }, [user, dispatch]);
 
   const handleLogout = () => {
     // Dispatch Logout Action
@@ -63,6 +76,11 @@ export default function Navbar() {
               </Link>
             )}
             <i className="fas fa-shopping-cart" />
+            {isAuthenticated && user && user.role === "ADMIN" ? (
+              <Link to="/admin">
+                <i className="fas fa-user-cog" />
+              </Link>
+            ) : null}
           </div>
         </div>
       </div>

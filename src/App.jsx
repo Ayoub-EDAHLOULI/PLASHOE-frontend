@@ -1,6 +1,7 @@
 import "./App.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { Route, Routes } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { Home } from "./pages/Home/Home";
 import Carousel from "./components/Carousel/Carousel";
 import Navbar from "./components/Navbar/Navbar";
@@ -13,27 +14,37 @@ import Shipping from "./components/Shipping/Shipping";
 import ContactUs from "./pages/ContactUs/ContactUs";
 import DisplayProducts from "./pages/DisplayProducts/DisplayProducts";
 import Products from "./pages/Products/Products";
+import { useEffect } from "react";
+import { checkAuthentication } from "./store/Actions/userActions";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(checkAuthentication());
+    const user = localStorage.getItem("user");
+    if (user) {
+      dispatch({ type: "FETCH_USER_SUCCESS", payload: JSON.parse(user) });
+    }
+  }, [dispatch]);
+
   return (
-    <>
-      <div className="App">
-        <Carousel />
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/forgot-password" element={<RecoverPassword />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact-us" element={<ContactUs />} />
-          <Route path="/collection" element={<DisplayProducts />} />
-          <Route path="/products" element={<Products />} />
-        </Routes>
-        <Shipping />
-        <Footer />
-      </div>
-    </>
+    <div className="App">
+      <Carousel />
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<RecoverPassword />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact-us" element={<ContactUs />} />
+        <Route path="/collection" element={<DisplayProducts />} />
+        <Route path="/products" element={<Products />} />
+      </Routes>
+      <Shipping />
+      <Footer />
+    </div>
   );
 }
 

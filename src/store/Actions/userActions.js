@@ -47,7 +47,8 @@ export const checkAuthentication = () => {
 
       const data = await response.json();
       if (response.ok) {
-        dispatch({ type: FETCH_USER_SUCCESS, payload: data });
+        localStorage.setItem("user", JSON.stringify(data.data));
+        dispatch({ type: FETCH_USER_SUCCESS, payload: data.data });
       } else {
         dispatch({ type: FETCH_USER_FAIL, payload: data.message });
       }
