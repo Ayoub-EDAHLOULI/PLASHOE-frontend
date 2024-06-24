@@ -1,0 +1,99 @@
+.product__description__review {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 5rem 0;
+  padding: 0 50px;
+
+  .product__tabs {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+
+    .tab__button {
+      cursor: pointer;
+      color: #000;
+      font-size: 1rem;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .active__tab {
+      color: red;
+    }
+  }
+
+  .product__description {
+    margin-top: 20px;
+    p {
+      font-size: 17px;
+      font-family: var(--font-secondary);
+      font-weight: 400;
+      color: #797979;
+      line-height: 1.5;
+      text-align: start;
+    }
+  }
+
+  .product__review {
+    width: 100%;
+
+    .review__content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 20px;
+
+      h4 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #3a3a3a;
+      }
+
+      .rating__review {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+
+        .rating__stars {
+          color: #f0c14b;
+          cursor: pointer;
+
+          i {
+            margin-right: 1px;
+          }
+        }
+      }
+
+      .review__textarea {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+
+        h4 {
+          font-size: 1.2rem;
+          font-weight: 600;
+          color: #3a3a3a;
+        }
+
+        textarea {
+          width: 100%;
+          height: 300px;
+          padding: 10px;
+          font-size: 1rem;
+          font-family: var(--font-secondary);
+          font-weight: 400;
+          color: #000;
+          border: 1px solid rgba(0, 0, 0, 0.2);
+          border-radius: 5px;
+          outline: none;
+        }
+      }
+    }
+  }
+}

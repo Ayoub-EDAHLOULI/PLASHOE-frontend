@@ -11,6 +11,7 @@ import RecoverPassword from "./pages/Auth/Recover password/RecoverPassword";
 import About from "./pages/About/About";
 import Shipping from "./components/Shipping/Shipping";
 import ContactUs from "./pages/ContactUs/ContactUs";
+import DisplayProducts from "./pages/DisplayProducts/DisplayProducts";
 import Products from "./pages/Products/Products";
 
 function App() {
@@ -26,7 +27,8 @@ function App() {
           <Route path="/forgot-password" element={<RecoverPassword />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact-us" element={<ContactUs />} />
-          <Route path="/collection" element={<Products />} />
+          <Route path="/collection" element={<DisplayProducts />} />
+          <Route path="/products" element={<Products />} />
         </Routes>
         <Shipping />
         <Footer />
