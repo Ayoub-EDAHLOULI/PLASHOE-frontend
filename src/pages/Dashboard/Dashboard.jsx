@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, NavLink, useNavigate } from "react-router-dom";
 import { logout } from "../../store/Actions/authActions";
 import TabProducts from "../../components/TabProduct/TabProduct";
+import AddProduct from "../../components/AddProduct/AddProduct";
 
 function Dashboard() {
   const dispatch = useDispatch();
@@ -111,7 +112,7 @@ function Dashboard() {
             // Add product content
             location.search.includes("tab=add-product") && (
               <div className="dashboard-main-add-product">
-                <h2>Add Product</h2>
+                <AddProduct />
               </div>
             )
           }

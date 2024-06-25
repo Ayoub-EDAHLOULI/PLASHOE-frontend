@@ -46,7 +46,7 @@ function TabProduct() {
               <option value="kid">Kids</option>
             </select>
           </div>
-          <div className="add-product">
+          <div className="add-product-button">
             <button onClick={handleAddProduct}>+ Add Product</button>
           </div>
         </div>
