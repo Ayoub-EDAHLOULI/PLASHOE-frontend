@@ -1,11 +1,12 @@
 import "./AddProduct.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { fetchCategories } from "../../store/Actions/categoryAction";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function AddProduct() {
+  //State for the form
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -13,8 +14,29 @@ function AddProduct() {
   const [file, setFile] = useState(null);
   const [categoryId, setCategoryId] = useState("");
 
+  //Redux Dispacth and Selector
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.category.categories);
+
+  //Navigate
+  const navigate = useNavigate();
+
+  //Set the switcher category path
+  const [addCategory, setAddCategory] = useState(false);
+
+  //Handle Add Category Button
+  const handleAddCategory = () => {
+    setAddCategory(true);
+    if (addCategory) {
+      //Change Url to add category
+      navigate("/dashboard?tab=add-category");
+    }
+  };
+
+  //UseEffect
+  useEffect(() => {
+    handleAddCategory();
+  }, []);
 
   //Fetch Categories
   useEffect(() => {
@@ -85,7 +107,10 @@ function AddProduct() {
 
   return (
     <div className="add-product">
-      <h2>Add Product</h2>
+      <div className="top_side">
+        <h2>Add Product</h2>
+        <button onClick={handleAddCategory}>+ Add New Category</button>
+      </div>
       <form onSubmit={handelSubmit}>
         {/* Product Name */}
         <div className="form-group">

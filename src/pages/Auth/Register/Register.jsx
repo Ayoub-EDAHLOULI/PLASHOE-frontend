@@ -2,17 +2,16 @@ import "./Register.scss";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { register } from "../../../store/Actions/authActions";
 import { ToastContainer } from "react-toastify";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { ToastContext } from "../../../context/ToastContext";
 import "react-toastify/dist/ReactToastify.css"; // Import CSS for Toastify
 
 function Register() {
   // Redux Logic
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
 
   // Toast Context
   const { addToast } = useContext(ToastContext);
@@ -40,20 +39,18 @@ function Register() {
 
     // Schema for form submission
     onSubmit: (values) => {
-      dispatch(register(values.name, values.email, values.password));
+      dispatch(register(values.name, values.email, values.password))
+        .then((response) => {
+          addToast(response, "success");
+        })
+        .catch((error) => {
+          addToast(error, "error");
+        });
 
       // Reset form after submission
       formik.resetForm();
     },
   });
-
-  useEffect(() => {
-    if (auth.error) {
-      addToast(auth.error, "error");
-    } else if (auth.isAuthenticated) {
-      addToast("User created successfully", "success");
-    }
-  }, [auth, addToast]);
 
   return (
     <div className="register">

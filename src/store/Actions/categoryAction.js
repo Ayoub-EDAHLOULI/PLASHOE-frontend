@@ -38,3 +38,38 @@ export const fetchCategories = () => {
     }
   };
 };
+
+//Create Category
+export const createCategory = (category) => {
+  return async (dispatch) => {
+    dispatch({ type: CREATE_CATEGORY_REQUEST });
+
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        dispatch({ type: CREATE_CATEGORY_FAIL, payload: "Unauthorized" });
+        return Promise.reject("Unauthorized");
+      }
+
+      const response = await fetch(`${apiURL}/category`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(category),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        dispatch({ type: CREATE_CATEGORY_SUCCESS, payload: data.data });
+        return Promise.resolve(data.message);
+      } else {
+        dispatch({ type: CREATE_CATEGORY_FAIL, payload: data.message });
+        return Promise.reject(data.message);
+      }
+    } catch (err) {
+      dispatch({ type: CREATE_CATEGORY_FAIL, payload: err.message });
+      return Promise.reject(err.message);
+    }
+  };
+};

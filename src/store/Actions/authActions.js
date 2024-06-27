@@ -27,17 +27,20 @@ export const register = (username, email, password) => async (dispatch) => {
         type: REGISTER_SUCCESS,
         payload: data.token,
       });
+      return Promise.resolve(data.message);
     } else {
       dispatch({
         type: REGISTER_FAIL,
         payload: data.message,
       });
+      return Promise.reject(data.message);
     }
   } catch (error) {
     dispatch({
       type: REGISTER_FAIL,
       payload: error.response.data.message,
     });
+    return Promise.reject(error.response.data.message);
   }
 };
 
@@ -59,11 +62,13 @@ export const login = (email, password) => async (dispatch) => {
       type: LOGIN_SUCCESS,
       payload: data.data.token,
     });
+    return Promise.resolve(data.message);
   } catch (error) {
     dispatch({
       type: LOGIN_FAIL,
       payload: error.response.data.message,
     });
+    return Promise.reject(error.response.data.message);
   }
 };
 

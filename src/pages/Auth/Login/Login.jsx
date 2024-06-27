@@ -2,17 +2,25 @@ import "./Login.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { login } from "../../../store/Actions/authActions";
 import { checkAuthentication } from "../../../store/Actions/userActions";
+import { ToastContext } from "../../../context/ToastContext";
+import { useContext } from "react";
+import { ToastContainer } from "react-toastify";
 
 function Login() {
   // Redux Logic
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
+
+  // Toast Context
+  const { addToast } = useContext(ToastContext);
 
   // React Router Navigate
   const navigate = useNavigate();
+
+  //Set toast duration in milliseconds
+  const toastDuration = 3000;
 
   // Formik Logic
   const formik = useFormik({
@@ -32,17 +40,23 @@ function Login() {
     }),
 
     // Schema for form submission
-    onSubmit: (values) => {
-      dispatch(login(values.email, values.password));
+    onSubmit: async (values) => {
+      dispatch(login(values.email, values.password))
+        .then((response) => {
+          addToast(response, "success");
+          dispatch(checkAuthentication());
+          setTimeout(() => {
+            navigate("/");
+          }, toastDuration);
+        })
+        .catch((error) => {
+          addToast(error, "error");
+        });
 
       // Reset form after submission
       formik.resetForm();
     },
   });
-
-  auth.error && alert(auth.error);
-  auth.isAuthenticated &&
-    (navigate("/", { replace: true }), dispatch(checkAuthentication()));
 
   return (
     <div className="login">
@@ -79,6 +93,8 @@ function Login() {
           <button type="submit">Login</button>
           <Link to="/register"> Create a new account </Link>
         </form>
+
+        <ToastContainer />
       </div>
     </div>
   );

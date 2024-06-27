@@ -5,6 +5,7 @@ import { useLocation, NavLink, useNavigate } from "react-router-dom";
 import { logout } from "../../store/Actions/authActions";
 import TabProducts from "../../components/TabProduct/TabProduct";
 import AddProduct from "../../components/AddProduct/AddProduct";
+import AddCategory from "../../components/AddCategory/AddCategory";
 
 function Dashboard() {
   const dispatch = useDispatch();
@@ -113,6 +114,15 @@ function Dashboard() {
             location.search.includes("tab=add-product") && (
               <div className="dashboard-main-add-product">
                 <AddProduct />
+              </div>
+            )
+          }
+
+          {
+            // Add category content
+            location.search.includes("tab=add-category") && (
+              <div className="dashboard-main-add-category">
+                <AddCategory />
               </div>
             )
           }

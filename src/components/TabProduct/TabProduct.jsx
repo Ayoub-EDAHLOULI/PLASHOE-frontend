@@ -95,17 +95,6 @@ function TabProduct() {
                   <button>Delete</button>
                 </td>
               </tr>
-
-              <tr className="tab-products-table-body">
-                <td>Product 1</td>
-                <td>$100</td>
-                <td>10</td>
-                <td>Men</td>
-                <td>
-                  <button>Edit</button>
-                  <button>Delete</button>
-                </td>
-              </tr>
             </tbody>
           </table>
         </div>
