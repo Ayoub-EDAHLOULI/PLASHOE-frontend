@@ -20,6 +20,29 @@ export const DELETE_PRODUCT_FAIL = "DELETE_PRODUCT_FAIL";
 
 const apiURL = "http://localhost:3000/api/v1";
 
+//Fetch Products
+export const fetchProducts = () => {
+  return async (dispatch) => {
+    dispatch({ type: FETCH_PRODUCTS_REQUEST });
+
+    try {
+      const response = await fetch(`${apiURL}/products`);
+      const data = await response.json();
+
+      if (response.ok) {
+        dispatch({ type: FETCH_PRODUCTS_SUCCESS, payload: data.data });
+        return Promise.resolve(data.message);
+      } else {
+        dispatch({ type: FETCH_PRODUCTS_FAIL, payload: data.message });
+        return Promise.reject(data.message);
+      }
+    } catch (err) {
+      dispatch({ type: FETCH_PRODUCTS_FAIL, payload: err.message });
+      return Promise.reject(err.message);
+    }
+  };
+};
+
 //Create Product
 export const createProduct = (product) => {
   return async (dispatch) => {

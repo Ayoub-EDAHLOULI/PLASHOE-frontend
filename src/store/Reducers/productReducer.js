@@ -4,6 +4,9 @@ import {
   CREATE_PRODUCT_REQUEST,
   CREATE_PRODUCT_SUCCESS,
   CREATE_PRODUCT_FAIL,
+  FETCH_PRODUCTS_REQUEST,
+  FETCH_PRODUCTS_SUCCESS,
+  FETCH_PRODUCTS_FAIL,
 } from "../Actions/productActions";
 
 const initialState = {
@@ -15,18 +18,21 @@ const initialState = {
 const productReducer = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_PRODUCT_REQUEST:
+    case FETCH_PRODUCTS_REQUEST:
       return {
         ...state,
         loading: true,
         error: null,
       };
     case CREATE_PRODUCT_SUCCESS:
+    case FETCH_PRODUCTS_SUCCESS:
       return {
         ...state,
         product: action.payload,
         loading: false,
       };
     case CREATE_PRODUCT_FAIL:
+    case FETCH_PRODUCTS_FAIL:
       return {
         ...state,
         loading: false,

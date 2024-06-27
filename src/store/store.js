@@ -4,7 +4,7 @@ import { thunk } from "redux-thunk"; // Change this line
 import authReducer from "./Reducers/authReducer";
 import userReducer from "./Reducers/userReducer";
 import productReducer from "./Reducers/productReducer";
-import categoryReducer from "./Reducers/categoryCategory";
+import categoryReducer from "./Reducers/categoryReducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,

@@ -1,7 +1,43 @@
 import "./Products.scss";
-import product1 from "../../assets/Products/Men/product1.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../../store/Actions/productActions";
+import { fetchCategories } from "../../store/Actions/categoryAction";
+import { useEffect, useState } from "react";
 
 function Products() {
+  // useDispatch
+  const dispatch = useDispatch();
+
+  // useSelector to get products and categories from the state
+  const products = useSelector((state) => state.product.product) || [];
+  const categories = useSelector((state) => state.category.categories) || [];
+
+  //Local State to manage loading
+  const [loading, setLoading] = useState(false);
+
+  console.log("Products", products);
+  console.log("Categories", categories);
+
+  // Get Category Name
+  const getCategoryName = (categoryId) => {
+    const category = categories.find((category) => category.id === categoryId);
+    return category ? category.name : "";
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        dispatch(fetchProducts());
+        dispatch(fetchCategories());
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+      setLoading(false);
+    };
+    fetchData();
+  }, [dispatch]);
+
   return (
     <div className="products">
       <div className="products__container">
@@ -9,120 +45,36 @@ function Products() {
           <h1>Products</h1>
         </div>
         <div className="products__container__content__items">
-          <div className="content__item">
-            <img src={product1} alt="Product 1" />
-            <div className="item_infos">
-              <div className="item_info">
-                <div className="des">
-                  <span>Cara</span>
-                  <h5>Carton Astronaut T-Shirt</h5>
-                  <div className="star">
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
+          {loading ? (
+            <h1>Loading...</h1>
+          ) : products.length > 0 ? (
+            products.map((product) => (
+              <div className="content__item" key={product.id}>
+                <img src={product.image} alt="" />
+                <div className="item_infos">
+                  <div className="item_info">
+                    <div className="des">
+                      <span>{getCategoryName(product.categoryId)}</span>
+                      <h5>{product.name}</h5>
+                      <div className="star">
+                        <i className="fa-solid fa-star"></i>
+                        <i className="fa-solid fa-star"></i>
+                        <i className="fa-solid fa-star"></i>
+                        <i className="fa-solid fa-star"></i>
+                        <i className="fa-solid fa-star"></i>
+                      </div>
+                      <h4>${product.price}</h4>
+                    </div>
+                    <a href="" className="cart">
+                      <i className="fa-solid fa-bag-shopping"></i>
+                    </a>
                   </div>
-                  <h4>$129</h4>
                 </div>
-                <a href="" className="cart">
-                  <i className="fa-solid fa-bag-shopping"></i>
-                </a>
               </div>
-            </div>
-          </div>
-
-          <div className="content__item">
-            <img src={product1} alt="Product 1" />
-            <div className="item_infos">
-              <div className="item_info">
-                <div className="des">
-                  <span>Cara</span>
-                  <h5>Carton Astronaut T-Shirt</h5>
-                  <div className="star">
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                  </div>
-                  <h4>$129</h4>
-                </div>
-                <a href="" className="cart">
-                  <i className="fa-solid fa-bag-shopping"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div className="content__item">
-            <img src={product1} alt="Product 1" />
-            <div className="item_infos">
-              <div className="item_info">
-                <div className="des">
-                  <span>Cara</span>
-                  <h5>Carton Astronaut T-Shirt</h5>
-                  <div className="star">
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                  </div>
-                  <h4>$129</h4>
-                </div>
-                <a href="" className="cart">
-                  <i className="fa-solid fa-bag-shopping"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div className="content__item">
-            <img src={product1} alt="Product 1" />
-            <div className="item_infos">
-              <div className="item_info">
-                <div className="des">
-                  <span>Cara</span>
-                  <h5>Carton Astronaut T-Shirt</h5>
-                  <div className="star">
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                  </div>
-                  <h4>$129</h4>
-                </div>
-                <a href="" className="cart">
-                  <i className="fa-solid fa-bag-shopping"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div className="content__item">
-            <img src={product1} alt="Product 1" />
-            <div className="item_infos">
-              <div className="item_info">
-                <div className="des">
-                  <span>Cara</span>
-                  <h5>Carton Astronaut T-Shirt</h5>
-                  <div className="star">
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                  </div>
-                  <h4>$129</h4>
-                </div>
-                <a href="" className="cart">
-                  <i className="fa-solid fa-bag-shopping"></i>
-                </a>
-              </div>
-            </div>
-          </div>
+            ))
+          ) : (
+            <h1>No Products</h1>
+          )}
         </div>
       </div>
     </div>
