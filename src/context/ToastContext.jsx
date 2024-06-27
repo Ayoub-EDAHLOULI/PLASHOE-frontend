@@ -9,7 +9,7 @@ const ToastProvider = (props) => {
     return new Promise((resolve) => {
       toast[type](message, {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

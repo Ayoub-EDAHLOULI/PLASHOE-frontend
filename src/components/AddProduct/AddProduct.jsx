@@ -1,9 +1,13 @@
 import "./AddProduct.scss";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { fetchCategories } from "../../store/Actions/categoryAction";
+import { createProduct } from "../../store/Actions/productActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { ToastContext } from "../../context/ToastContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function AddProduct() {
   //State for the form
@@ -16,27 +20,18 @@ function AddProduct() {
 
   //Redux Dispacth and Selector
   const dispatch = useDispatch();
-  const categories = useSelector((state) => state.category.categories);
+  const categories = useSelector((state) => state.category.categories || []);
 
   //Navigate
   const navigate = useNavigate();
 
-  //Set the switcher category path
-  const [addCategory, setAddCategory] = useState(false);
+  //Toast Context
+  const { addToast } = useContext(ToastContext);
 
   //Handle Add Category Button
   const handleAddCategory = () => {
-    setAddCategory(true);
-    if (addCategory) {
-      //Change Url to add category
-      navigate("/dashboard?tab=add-category");
-    }
+    navigate("/dashboard?tab=add-category");
   };
-
-  //UseEffect
-  useEffect(() => {
-    handleAddCategory();
-  }, []);
 
   //Fetch Categories
   useEffect(() => {
@@ -63,7 +58,7 @@ function AddProduct() {
 
       return res.data.data;
     } catch (error) {
-      console.log(error);
+      addToast(error.message, "error");
     }
   };
   const handelSubmit = async (e) => {
@@ -72,37 +67,39 @@ function AddProduct() {
     //Upload image
     const imageURL = await uploadImage(file);
 
-    const data = JSON.stringify({
-      name,
-      description,
-      price,
-      stock,
-      categoryId,
-      image: imageURL,
-    });
+    //Dispatch the create product action
+    dispatch(
+      createProduct({
+        name,
+        description,
+        price,
+        stock,
+        image: imageURL,
+        categoryId,
+      })
+    )
+      .then((response) => {
+        addToast(response, "success");
+        dispatch(fetchCategories());
 
-    try {
-      const res = await axios.post(
-        "http://127.0.0.1:3000/api/v1/product",
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
-      console.log(res.data);
+        //Reset the form
+        setName("");
+        setDescription("");
+        setPrice("");
+        setStock("");
+        setFile(null);
+        setCategoryId("");
 
-      //Reset the form
-      setName("");
-      setDescription("");
-      setPrice("");
-      setStock("");
-      setFile(null);
-    } catch (error) {
-      console.log(error);
-    }
+        //Empty the input fields
+        document
+          .querySelectorAll("input")
+          .forEach((input) => (input.value = ""));
+        document.querySelector("textarea").value = "";
+        document.querySelector("select").value = "";
+      })
+      .catch((error) => {
+        addToast(error, "error");
+      });
   };
 
   return (
@@ -167,11 +164,13 @@ function AddProduct() {
             onChange={(e) => setCategoryId(e.target.value)}
           >
             <option value="">Select Category</option>
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
+            {categories.length > 0
+              ? categories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))
+              : null}
           </select>
         </div>
 
@@ -188,6 +187,8 @@ function AddProduct() {
         </div>
         <button type="submit">Add Product</button>
       </form>
+
+      <ToastContainer />
     </div>
   );
 }

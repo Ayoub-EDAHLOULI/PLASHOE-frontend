@@ -20,7 +20,7 @@ function Login() {
   const navigate = useNavigate();
 
   //Set toast duration in milliseconds
-  const toastDuration = 3000;
+  const toastDuration = 2000;
 
   // Formik Logic
   const formik = useFormik({
