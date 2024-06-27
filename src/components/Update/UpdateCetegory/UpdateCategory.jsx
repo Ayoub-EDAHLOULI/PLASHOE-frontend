@@ -2,6 +2,7 @@ import "./UpdateCategory.scss";
 import { useState, useContext } from "react";
 import { useDispatch } from "react-redux";
 import { updateCategory } from "../../../store/Actions/categoryAction";
+import { fetchCategories } from "../../../store/Actions/categoryAction";
 import { ToastContext } from "../../../context/ToastContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -27,6 +28,9 @@ function UpdateCategory() {
     dispatch(updateCategory({ name: category, id: Number(categoryId) }))
       .then((response) => {
         addToast(response, "success");
+
+        //Fetch the categories
+        dispatch(fetchCategories());
         setCategory("");
       })
       .catch((error) => {

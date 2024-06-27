@@ -108,3 +108,36 @@ export const updateCategory = (category) => {
     }
   };
 };
+
+// Delete Category
+export const deleteCategory = (categoryId) => {
+  return async (dispatch) => {
+    dispatch({ type: DELETE_CATEGORY_REQUEST });
+
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        dispatch({ type: DELETE_CATEGORY_FAIL, payload: "Unauthorized" });
+        return Promise.reject("Unauthorized");
+      }
+
+      const response = await fetch(`${apiURL}/category/${categoryId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      if (response.ok) {
+        dispatch({ type: DELETE_CATEGORY_SUCCESS, payload: categoryId });
+        return Promise.resolve(data.message);
+      } else {
+        dispatch({ type: DELETE_CATEGORY_FAIL, payload: data.message });
+        return Promise.reject(data.message);
+      }
+    } catch (err) {
+      dispatch({ type: DELETE_CATEGORY_FAIL, payload: err.message });
+      return Promise.reject(err.message);
+    }
+  };
+};

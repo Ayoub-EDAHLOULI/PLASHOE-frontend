@@ -2,16 +2,18 @@ import "./TabCategory.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useContext, useEffect } from "react";
 import { createCategory } from "../../store/Actions/categoryAction";
+import { deleteCategory } from "../../store/Actions/categoryAction";
 import { ToastContext } from "../../context/ToastContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { fetchCategories } from "../../store/Actions/categoryAction";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function TabCategory() {
   //Redux Dispacth and Selector
   const dispatch = useDispatch();
-  const categories = useSelector((state) => state.category.categories);
+  const categories = useSelector((state) => state.category.categories || []);
 
   //Toast Context
   const { addToast } = useContext(ToastContext);
@@ -21,23 +23,42 @@ function TabCategory() {
 
   //State for the form
   const [category, setCategory] = useState("");
-  const [editCategory, setEditCategory] = useState(false);
 
   //Edit Category
   const handleCategoryEdit = (id) => {
-    setEditCategory(true);
-    editCategory && navigate(`/dashboard?tab=edit-category&id=${id}`);
+    navigate(`/dashboard?tab=edit-category&id=${id}`);
   };
 
-  useEffect(() => {
-    handleCategoryEdit();
-  }, []);
+  //Delete Category
+  const handleCategoryDelete = (id) => {
+    console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, cancel!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteCategory(id))
+          .then(() => {
+            Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            dispatch(fetchCategories());
+          })
+          .catch((error) => {
+            Swal.fire("Error!", error, "error");
+          });
+      }
+    });
+  };
 
   //Add Category
   const handleAddCategory = () => {
     dispatch(createCategory({ name: category }))
       .then((response) => {
         addToast(response, "success");
+        dispatch(fetchCategories());
         setCategory("");
       })
       .catch((error) => {
@@ -80,20 +101,31 @@ function TabCategory() {
           <tbody>
             {
               //Map through the categories
-              categories.map((category) => (
-                <tr key={category.id} className="tab-products-table-body">
-                  <td>{category.name}</td>
-                  <td>
-                    <button
-                      className="edit"
-                      onClick={() => handleCategoryEdit(category.id)}
-                    >
-                      Edit
-                    </button>
-                    <button className="delete">Delete</button>
-                  </td>
+              categories.length > 0 ? (
+                categories.map((category) => (
+                  <tr key={category.id} className="tab-products-table-body">
+                    <td>{category.name}</td>
+                    <td>
+                      <button
+                        className="edit"
+                        onClick={() => handleCategoryEdit(category.id)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="delete"
+                        onClick={() => handleCategoryDelete(category.id)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="2">No Categories Found</td>
                 </tr>
-              ))
+              )
             }
           </tbody>
         </thead>
