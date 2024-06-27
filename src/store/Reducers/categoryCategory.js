@@ -7,6 +7,9 @@ import {
   CREATE_CATEGORY_REQUEST,
   CREATE_CATEGORY_SUCCESS,
   CREATE_CATEGORY_FAIL,
+  UPDATE_CATEGORY_REQUEST,
+  UPDATE_CATEGORY_SUCCESS,
+  UPDATE_CATEGORY_FAIL,
 } from "../Actions/categoryAction";
 
 const initialState = {
@@ -19,6 +22,7 @@ const categoryReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_CATEGORIES_REQUEST:
     case CREATE_CATEGORY_REQUEST:
+    case UPDATE_CATEGORY_REQUEST:
       return {
         ...state,
         loading: true,
@@ -26,6 +30,7 @@ const categoryReducer = (state = initialState, action) => {
       };
     case FETCH_CATEGORIES_SUCCESS:
     case CREATE_CATEGORY_SUCCESS:
+    case UPDATE_CATEGORY_SUCCESS:
       return {
         ...state,
         categories: action.payload,
@@ -33,6 +38,7 @@ const categoryReducer = (state = initialState, action) => {
       };
     case FETCH_CATEGORIES_FAIL:
     case CREATE_CATEGORY_FAIL:
+    case UPDATE_CATEGORY_FAIL:
       return {
         ...state,
         loading: false,

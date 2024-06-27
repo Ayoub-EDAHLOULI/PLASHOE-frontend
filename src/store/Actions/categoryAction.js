@@ -73,3 +73,38 @@ export const createCategory = (category) => {
     }
   };
 };
+
+// Update Category
+export const updateCategory = (category) => {
+  return async (dispatch) => {
+    dispatch({ type: UPDATE_CATEGORY_REQUEST });
+
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        dispatch({ type: UPDATE_CATEGORY_FAIL, payload: "Unauthorized" });
+        return Promise.reject("Unauthorized");
+      }
+
+      const response = await fetch(`${apiURL}/category/${category.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(category),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        dispatch({ type: UPDATE_CATEGORY_SUCCESS, payload: data.data });
+        return Promise.resolve(data.message);
+      } else {
+        dispatch({ type: UPDATE_CATEGORY_FAIL, payload: data.message });
+        return Promise.reject(data.message);
+      }
+    } catch (err) {
+      dispatch({ type: UPDATE_CATEGORY_FAIL, payload: err.message });
+      return Promise.reject(err.message);
+    }
+  };
+};

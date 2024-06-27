@@ -6,6 +6,7 @@ import { ToastContext } from "../../context/ToastContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { fetchCategories } from "../../store/Actions/categoryAction";
+import { useNavigate } from "react-router-dom";
 
 function TabCategory() {
   //Redux Dispacth and Selector
@@ -15,8 +16,22 @@ function TabCategory() {
   //Toast Context
   const { addToast } = useContext(ToastContext);
 
+  //Navigate
+  const navigate = useNavigate();
+
   //State for the form
   const [category, setCategory] = useState("");
+  const [editCategory, setEditCategory] = useState(false);
+
+  //Edit Category
+  const handleCategoryEdit = (id) => {
+    setEditCategory(true);
+    editCategory && navigate(`/dashboard?tab=edit-category&id=${id}`);
+  };
+
+  useEffect(() => {
+    handleCategoryEdit();
+  }, []);
 
   //Add Category
   const handleAddCategory = () => {
@@ -69,7 +84,12 @@ function TabCategory() {
                 <tr key={category.id} className="tab-products-table-body">
                   <td>{category.name}</td>
                   <td>
-                    <button className="edit">Edit</button>
+                    <button
+                      className="edit"
+                      onClick={() => handleCategoryEdit(category.id)}
+                    >
+                      Edit
+                    </button>
                     <button className="delete">Delete</button>
                   </td>
                 </tr>
