@@ -1,22 +1,55 @@
 import "./TabProduct.scss";
-import { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../../store/Actions/productActions";
+import { fetchCategories } from "../../store/Actions/categoryAction";
 
 function TabProduct() {
-  const [addProduct, setAddProduct] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 3;
+
+  //useNavigate to navigate to a different route
   const navigate = useNavigate();
 
+  //useDispatch to dispatch an action
+  const dispatch = useDispatch();
+
+  // useSelector to get products and categories from the state
+  const products = useSelector((state) => state.product.product) || [];
+  const categories = useSelector((state) => state.category.categories) || [];
+
+  // Get Category Name
+  const getCategoryName = (categoryId) => {
+    const category = categories.find((category) => category.id === categoryId);
+    return category ? category.name : "";
+  };
+
+  useMemo(() => {
+    dispatch(fetchProducts());
+    dispatch(fetchCategories());
+  }, [dispatch]);
+
+  //Handle Add Product
   const handleAddProduct = () => {
-    setAddProduct(true);
-    if (addProduct) {
-      //Change Url to add product
-      navigate("/dashboard?tab=add-product");
+    navigate("/dashboard?tab=add-product");
+  };
+
+  const handlePreviousPage = () => {
+    setCurrentPage((prev) => prev - 1);
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prev) => prev + 1);
     }
   };
 
-  useEffect(() => {
-    handleAddProduct();
-  }, []);
+  const totalPages = Math.ceil(products.length / productsPerPage);
+  const currentProducts = products.slice(
+    (currentPage - 1) * productsPerPage,
+    currentPage * productsPerPage
+  );
 
   return (
     <div className="tab-products">
@@ -63,40 +96,43 @@ function TabProduct() {
               </tr>
             </thead>
             <tbody>
-              <tr className="tab-products-table-body">
-                <td>Product 1</td>
-                <td>$100</td>
-                <td>10</td>
-                <td>Men</td>
-                <td>
-                  <button>Edit</button>
-                  <button>Delete</button>
-                </td>
-              </tr>
-
-              <tr className="tab-products-table-body">
-                <td>Product 1</td>
-                <td>$100</td>
-                <td>10</td>
-                <td>Men</td>
-                <td>
-                  <button>Edit</button>
-                  <button>Delete</button>
-                </td>
-              </tr>
-
-              <tr className="tab-products-table-body">
-                <td>Product 1</td>
-                <td>$100</td>
-                <td>10</td>
-                <td>Men</td>
-                <td>
-                  <button>Edit</button>
-                  <button>Delete</button>
-                </td>
-              </tr>
+              {currentProducts.length > 0 ? (
+                currentProducts.map((product) => (
+                  <tr className="tab-products-table-body" key={product.id}>
+                    <td>{product.name}</td>
+                    <td>${product.price}</td>
+                    <td>{product.stock}</td>
+                    <td>{getCategoryName(product.categoryId)}</td>
+                    <td>
+                      <button>Edit</button>
+                      <button>Delete</button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="5">No Products Found</td>
+                </tr>
+              )}
             </tbody>
           </table>
+        </div>
+
+        <div className="pagination">
+          <button
+            onClick={handlePreviousPage}
+            disabled={currentPage === 1}
+            className={currentPage === 1 ? "disable" : ""}
+          >
+            &laquo;
+          </button>
+          <button
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+            className={currentPage === totalPages ? "disable" : ""}
+          >
+            &raquo;
+          </button>
         </div>
       </div>
     </div>
