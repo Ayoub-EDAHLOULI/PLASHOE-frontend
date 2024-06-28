@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../store/Actions/productActions";
 import { fetchCategories } from "../../store/Actions/categoryAction";
+import { deleteProduct } from "../../store/Actions/productActions";
+import Swal from "sweetalert2";
 
 function TabProduct() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -56,6 +58,30 @@ function TabProduct() {
   //Hnadle Edit Product
   const handleEditProduct = (id) => {
     navigate(`/dashboard?tab=edit-product&id=${id}`);
+  };
+
+  //Handle Delete Product
+  const handleDeleteProduct = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, cancel!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        //dispatch an action to delete the product
+        dispatch(deleteProduct(id))
+          .then(() => {
+            Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            dispatch(fetchProducts());
+          })
+          .catch((error) => {
+            Swal.fire("Error!", error, "error");
+          });
+      }
+    });
   };
 
   return (
@@ -114,7 +140,9 @@ function TabProduct() {
                       <button onClick={() => handleEditProduct(product.id)}>
                         Edit
                       </button>
-                      <button>Delete</button>
+                      <button onClick={() => handleDeleteProduct(product.id)}>
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 ))

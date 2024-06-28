@@ -111,8 +111,6 @@ export const updateProduct = (product) => {
   return async (dispatch) => {
     dispatch({ type: UPDATE_PRODUCT_REQUEST });
 
-    console.log("Product ===========> ", product);
-
     try {
       const token = localStorage.getItem("token");
       if (!token) {
@@ -139,6 +137,42 @@ export const updateProduct = (product) => {
       }
     } catch (err) {
       dispatch({ type: UPDATE_PRODUCT_FAIL, payload: err.message });
+      return Promise.reject(err.message);
+    }
+  };
+};
+
+//Delete Product
+export const deleteProduct = (productId) => {
+  return async (dispatch) => {
+    dispatch({ type: DELETE_PRODUCT_REQUEST });
+
+    console.log("Id", productId);
+
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        dispatch({ type: DELETE_PRODUCT_FAIL, payload: "Unauthorized" });
+        return Promise.reject("Unauthorized");
+      }
+
+      const response = await fetch(`${apiURL}/product/${productId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        dispatch({ type: DELETE_PRODUCT_SUCCESS, payload: data.data });
+        return Promise.resolve(data.message);
+      } else {
+        dispatch({ type: DELETE_PRODUCT_FAIL, payload: data.message });
+        return Promise.reject(data.message);
+      }
+    } catch (err) {
+      dispatch({ type: DELETE_PRODUCT_FAIL, payload: err.message });
       return Promise.reject(err.message);
     }
   };
