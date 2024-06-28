@@ -128,7 +128,7 @@ function Dashboard() {
           }
 
           {
-            // Articles content
+            // Product content
             location.search.includes("tab=Products") && (
               <div className="dashboard-main-products">
                 <TabProducts />

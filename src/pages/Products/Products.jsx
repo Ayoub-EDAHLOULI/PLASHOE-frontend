@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../store/Actions/productActions";
 import { fetchCategories } from "../../store/Actions/categoryAction";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Products() {
   // useDispatch
@@ -14,9 +15,6 @@ function Products() {
 
   //Local State to manage loading
   const [loading, setLoading] = useState(false);
-
-  console.log("Products", products);
-  console.log("Categories", categories);
 
   // Get Category Name
   const getCategoryName = (categoryId) => {
@@ -49,28 +47,34 @@ function Products() {
             <h1>Loading...</h1>
           ) : products.length > 0 ? (
             products.map((product) => (
-              <div className="content__item" key={product.id}>
-                <img src={product.image} alt="" />
-                <div className="item_infos">
-                  <div className="item_info">
-                    <div className="des">
-                      <span>{getCategoryName(product.categoryId)}</span>
-                      <h5>{product.name}</h5>
-                      <div className="star">
-                        <i className="fa-solid fa-star"></i>
-                        <i className="fa-solid fa-star"></i>
-                        <i className="fa-solid fa-star"></i>
-                        <i className="fa-solid fa-star"></i>
-                        <i className="fa-solid fa-star"></i>
+              <Link
+                to={`/product/${product.id}`}
+                key={product.id}
+                className="product-link"
+              >
+                <div className="content__item" key={product.id}>
+                  <img src={product.image} alt="" />
+                  <div className="item_infos">
+                    <div className="item_info">
+                      <div className="des">
+                        <span>{getCategoryName(product.categoryId)}</span>
+                        <h5>{product.name}</h5>
+                        <div className="star">
+                          <i className="fa-solid fa-star"></i>
+                          <i className="fa-solid fa-star"></i>
+                          <i className="fa-solid fa-star"></i>
+                          <i className="fa-solid fa-star"></i>
+                          <i className="fa-solid fa-star"></i>
+                        </div>
+                        <h4>${product.price}</h4>
                       </div>
-                      <h4>${product.price}</h4>
+                      <a href="" className="cart">
+                        <i className="fa-solid fa-bag-shopping"></i>
+                      </a>
                     </div>
-                    <a href="" className="cart">
-                      <i className="fa-solid fa-bag-shopping"></i>
-                    </a>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))
           ) : (
             <h1>No Products</h1>

@@ -21,12 +21,13 @@
       .product__image {
         width: 50%;
         height: 100%;
-        object-fit: cover;
+
         background-size: 110%;
 
         img {
           width: 600px;
           height: 100%;
+          object-fit: contain;
           border-radius: 15px;
           cursor: pointer;
           position: relative;
@@ -60,6 +61,7 @@
           font-size: 50px;
           font-weight: 600;
           margin-bottom: 30px;
+          text-align: start;
           font-family: var(--font-secondary);
         }
 

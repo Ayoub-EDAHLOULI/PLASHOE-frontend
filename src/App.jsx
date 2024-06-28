@@ -12,12 +12,12 @@ import RecoverPassword from "./pages/Auth/Recover password/RecoverPassword";
 import About from "./pages/About/About";
 import Shipping from "./components/Shipping/Shipping";
 import ContactUs from "./pages/ContactUs/ContactUs";
-import DisplayProduct from "./pages/DisplayProduct/DisplayProduct";
 import Products from "./pages/Products/Products";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import { useEffect } from "react";
 import { checkAuthentication } from "./store/Actions/userActions";
 import { PrivateAdminRoute } from "./components/PrivateRoutes/PrivateAdminRoute";
+import DisplayProduct from "./pages/DisplayProduct/DisplayProduct";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,7 +42,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/collection" element={<Products />} />
-        <Route path="/products" element={<DisplayProduct />} />
+        <Route path="/product/:id" element={<DisplayProduct />} />
         <Route element={<PrivateAdminRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
         </Route>

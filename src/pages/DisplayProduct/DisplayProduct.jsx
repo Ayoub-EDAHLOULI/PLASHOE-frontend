@@ -1,59 +1,97 @@
 import "./DisplayProduct.scss";
-import Product1 from "../../assets/Products/Men/product1.jpg";
 import ProductDescription from "../../components/ProductDescription/ProductDescription";
+import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProduct } from "../../store/Actions/productActions";
+import { fetchCategories } from "../../store/Actions/categoryAction";
+import { useEffect, useState } from "react";
 
 function DisplayProduct() {
+  const location = useLocation();
+  const productId = location.pathname.split("/")[2];
+
+  const dispatch = useDispatch();
+  const product = useSelector((state) => state.product.product) || [];
+  const categories = useSelector((state) => state.category.categories) || [];
+
+  //Local State to manage loading
+  const [loading, setLoading] = useState(false);
+
+  console.log("Product Data", product);
+
+  // Get Category Name
+  const getCategoryName = (categoryId) => {
+    const category = categories.find((category) => category.id === categoryId);
+    return category ? category.name : "";
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        await dispatch(fetchProduct(productId));
+        dispatch(fetchCategories());
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+      setLoading(false);
+    };
+    fetchData();
+  }, [dispatch]);
+
+  console.log("Product Data", product);
+  console.log("Name", product.name);
+
   return (
     <div className="products">
       <div className="products__container">
-        <div className="product__content">
-          <div className="product__image">
-            <img src={Product1} alt="Product1" />
-          </div>
-          <div className="product__info">
-            <div className="product__tags">
-              <span>Sneaker & </span>
-              <span>Women</span>
+        {loading ? (
+          <h1>Loading...</h1>
+        ) : (
+          <div className="product__content" key={product.id}>
+            <div className="product__image">
+              <img src={product.image} alt="Product1" />
             </div>
-            <h2 className="product__name">Nike Air Max 270 React</h2>
-            <div className="product__price__rate">
-              <span className="product__price">$150</span>
-              <div className="product__rate">
-                <span className="product__rate">4.5</span>
-                <i className="fa-solid fa-star"></i>
+            <div className="product__info">
+              <div className="product__tags">
+                <span>{getCategoryName(product.categoryId)}</span>
               </div>
-            </div>
-            <p className="product__description">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-              ultricies, turpis nec tincidunt interdum, elit mi ultrices odio,
-              eget tempor sapien nisl ut nunc.
-            </p>
-            <div className="product__quantity">
-              <span className="quantity__title">Quantity:</span>
-              <div className="quantity__buttons">
-                <button className="quantity__btn">-</button>
-                <span className="quantity__number">1</span>
-                <button className="quantity__btn">+</button>
+              <h2 className="product__name">{product.name}</h2>
+              <div className="product__price__rate">
+                <span className="product__price">${product.price}</span>
+                <div className="product__rate">
+                  <span className="product__rate">4.5</span>
+                  <i className="fa-solid fa-star"></i>
+                </div>
               </div>
-            </div>
-            <div className="in__stock">In Stock</div>
-            <div className="cards__buttons">
-              <button>Add to Cart</button>
-              <button>Buy Now</button>
-            </div>
-            <div className="product__shipping">
-              <div className="top__shipping">
-                <i className="fa-solid fa-truck-fast"></i>
-                <span>Fast Shipping</span>
+              <div className="product__quantity">
+                <span className="quantity__title">Quantity:</span>
+                <div className="quantity__buttons">
+                  <button className="quantity__btn">-</button>
+                  <span className="quantity__number">1</span>
+                  <button className="quantity__btn">+</button>
+                </div>
               </div>
-              <div className="bottom__shipping">
-                <span>
-                  Place your order before 12:00pm and receive it by tomorrow
-                </span>
+              <div className="in__stock">In Stock</div>
+              <div className="cards__buttons">
+                <button>Add to Cart</button>
+                <button>Buy Now</button>
+              </div>
+              <div className="product__shipping">
+                <div className="top__shipping">
+                  <i className="fa-solid fa-truck-fast"></i>
+                  <span>Fast Shipping</span>
+                </div>
+                <div className="bottom__shipping">
+                  <span>
+                    Place your order before 12:00pm and receive it by tomorrow
+                  </span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
 
         <ProductDescription />
       </div>

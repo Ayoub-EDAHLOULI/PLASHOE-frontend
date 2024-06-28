@@ -3,6 +3,11 @@ export const FETCH_PRODUCTS_REQUEST = "FETCH_PRODUCTS_REQUEST";
 export const FETCH_PRODUCTS_SUCCESS = "FETCH_PRODUCTS_SUCCESS";
 export const FETCH_PRODUCTS_FAIL = "FETCH_PRODUCTS_FAIL";
 
+//Fetch Product Actions
+export const FETCH_PRODUCT_REQUEST = "FETCH_PRODUCT_REQUEST";
+export const FETCH_PRODUCT_SUCCESS = "FETCH_PRODUCT_SUCCESS";
+export const FETCH_PRODUCT_FAIL = "FETCH_PRODUCT_FAIL";
+
 //Create Product Actions
 export const CREATE_PRODUCT_REQUEST = "CREATE_PRODUCT_REQUEST";
 export const CREATE_PRODUCT_SUCCESS = "CREATE_PRODUCT_SUCCESS";
@@ -38,6 +43,29 @@ export const fetchProducts = () => {
       }
     } catch (err) {
       dispatch({ type: FETCH_PRODUCTS_FAIL, payload: err.message });
+      return Promise.reject(err.message);
+    }
+  };
+};
+
+//Fetch Product
+export const fetchProduct = (id) => {
+  return async (dispatch) => {
+    dispatch({ type: FETCH_PRODUCT_REQUEST });
+
+    try {
+      const response = await fetch(`${apiURL}/product/${id}`);
+      const data = await response.json();
+
+      if (response.ok) {
+        dispatch({ type: FETCH_PRODUCT_SUCCESS, payload: data.data });
+        return Promise.resolve(data.message);
+      } else {
+        dispatch({ type: FETCH_PRODUCT_FAIL, payload: data.message });
+        return Promise.reject(data.message);
+      }
+    } catch (err) {
+      dispatch({ type: FETCH_PRODUCT_FAIL, payload: err.message });
       return Promise.reject(err.message);
     }
   };
