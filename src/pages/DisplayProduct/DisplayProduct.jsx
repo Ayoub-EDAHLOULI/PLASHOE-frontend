@@ -93,7 +93,7 @@ function DisplayProduct() {
           </div>
         )}
 
-        <ProductDescription />
+        <ProductDescription description={product.description} />
       </div>
     </div>
   );
