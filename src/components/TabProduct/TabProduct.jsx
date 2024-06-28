@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 
 function TabProduct() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [query, setQuery] = useState("");
   const productsPerPage = 3;
 
   //useNavigate to navigate to a different route
@@ -49,12 +50,6 @@ function TabProduct() {
     }
   };
 
-  const totalPages = Math.ceil(products.length / productsPerPage);
-  const currentProducts = products.slice(
-    (currentPage - 1) * productsPerPage,
-    currentPage * productsPerPage
-  );
-
   //Hnadle Edit Product
   const handleEditProduct = (id) => {
     navigate(`/dashboard?tab=edit-product&id=${id}`);
@@ -84,6 +79,23 @@ function TabProduct() {
     });
   };
 
+  //Special characters for the search input
+  const escapeRegExp = (string) => {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&''\\’");
+  };
+
+  //Filter Products
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(escapeRegExp(query.toLowerCase()))
+  );
+
+  //Get Total Pages
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+  const currentProducts = filteredProducts.slice(
+    (currentPage - 1) * productsPerPage,
+    currentPage * productsPerPage
+  );
+
   return (
     <div className="tab-products">
       <div className="tab-products-header">
@@ -94,7 +106,12 @@ function TabProduct() {
           <div className="search">
             <div className="searchInput">
               <i className="fa-solid fa-magnifying-glass"></i>
-              <input type="search" placeholder="Search Item..." />
+              <input
+                type="search"
+                placeholder="Search Item..."
+                value={query}
+                onChange={(e) => setQuery(e.target.value) && setCurrentPage(1)}
+              />
             </div>
           </div>
           <div className="tab-products-filter">
