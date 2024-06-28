@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 function TabProduct() {
   const [currentPage, setCurrentPage] = useState(1);
   const [query, setQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
   const productsPerPage = 3;
 
   //useNavigate to navigate to a different route
@@ -81,13 +82,20 @@ function TabProduct() {
 
   //Special characters for the search input
   const escapeRegExp = (string) => {
-    return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&''\\’");
+    return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&'’\\");
   };
 
   //Filter Products
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(escapeRegExp(query.toLowerCase()))
-  );
+  const filteredProducts = products.filter((product) => {
+    const matchesQuery = product.name
+      .toLowerCase()
+      .includes(escapeRegExp(query.toLowerCase()));
+    const matchesCategory =
+      selectedCategory === "all"
+        ? true
+        : product.categoryId === Number(selectedCategory);
+    return matchesQuery && matchesCategory;
+  });
 
   //Get Total Pages
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
@@ -122,11 +130,19 @@ function TabProduct() {
             </select>
           </div>
           <div className="tab-products-sort">
-            <select>
-              <option value="default">All Products</option>
-              <option value="men">Men</option>
-              <option value="women">Women</option>
-              <option value="kid">Kids</option>
+            <select
+              value={selectedCategory}
+              onChange={(e) => {
+                setSelectedCategory(e.target.value);
+                setCurrentPage(1);
+              }}
+            >
+              <option value="all">All Products</option>
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
             </select>
           </div>
           <div className="add-product-button">
