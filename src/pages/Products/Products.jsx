@@ -2,6 +2,7 @@ import "./Products.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../store/Actions/productActions";
 import { fetchCategories } from "../../store/Actions/categoryAction";
+import { createCart } from "../../store/Actions/cartActions";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -36,6 +37,19 @@ function Products() {
     fetchData();
   }, [dispatch]);
 
+  const handleAddToCart = (id, event) => {
+    event.preventDefault();
+
+    // Add product to cart
+    dispatch(createCart({ productId: id, quantity: 1 }))
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error("Error adding product to cart:", error);
+      });
+  };
+
   return (
     <div className="products">
       <div className="products__container">
@@ -68,7 +82,11 @@ function Products() {
                         </div>
                         <h4>${product.price}</h4>
                       </div>
-                      <a href="" className="cart">
+                      <a
+                        href=""
+                        className="cart"
+                        onClick={(e) => handleAddToCart(product.id, e)}
+                      >
                         <i className="fa-solid fa-bag-shopping"></i>
                       </a>
                     </div>

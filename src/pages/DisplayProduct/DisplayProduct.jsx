@@ -17,8 +17,6 @@ function DisplayProduct() {
   //Local State to manage loading
   const [loading, setLoading] = useState(false);
 
-  console.log("Product Data", product);
-
   // Get Category Name
   const getCategoryName = (categoryId) => {
     const category = categories.find((category) => category.id === categoryId);
@@ -39,9 +37,6 @@ function DisplayProduct() {
     };
     fetchData();
   }, [dispatch, productId]);
-
-  console.log("Product Data", product);
-  console.log("Name", product.name);
 
   return (
     <div className="products">
