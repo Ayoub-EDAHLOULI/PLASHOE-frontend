@@ -27,10 +27,10 @@ function DisplayProduct() {
 
   useEffect(() => {
     setLoading(true);
-    const fetchData = async () => {
+    const fetchData = () => {
       setLoading(true);
       try {
-        await dispatch(fetchProduct(productId));
+        dispatch(fetchProduct(productId));
         dispatch(fetchCategories());
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -38,7 +38,7 @@ function DisplayProduct() {
       setLoading(false);
     };
     fetchData();
-  }, [dispatch]);
+  }, [dispatch, productId]);
 
   console.log("Product Data", product);
   console.log("Name", product.name);
