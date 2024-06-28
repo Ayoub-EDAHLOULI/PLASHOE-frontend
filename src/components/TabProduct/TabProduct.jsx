@@ -25,6 +25,7 @@ function TabProduct() {
     return category ? category.name : "";
   };
 
+  //Fetch Products and Categories
   useMemo(() => {
     dispatch(fetchProducts());
     dispatch(fetchCategories());
@@ -35,6 +36,7 @@ function TabProduct() {
     navigate("/dashboard?tab=add-product");
   };
 
+  //Handle Pagination
   const handlePreviousPage = () => {
     setCurrentPage((prev) => prev - 1);
   };
@@ -50,6 +52,11 @@ function TabProduct() {
     (currentPage - 1) * productsPerPage,
     currentPage * productsPerPage
   );
+
+  //Hnadle Edit Product
+  const handleEditProduct = (id) => {
+    navigate(`/dashboard?tab=edit-product&id=${id}`);
+  };
 
   return (
     <div className="tab-products">
@@ -104,7 +111,9 @@ function TabProduct() {
                     <td>{product.stock}</td>
                     <td>{getCategoryName(product.categoryId)}</td>
                     <td>
-                      <button>Edit</button>
+                      <button onClick={() => handleEditProduct(product.id)}>
+                        Edit
+                      </button>
                       <button>Delete</button>
                     </td>
                   </tr>

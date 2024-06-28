@@ -7,6 +7,7 @@ import TabProducts from "../../components/TabProduct/TabProduct";
 import AddProduct from "../../components/AddProduct/AddProduct";
 import TabCategory from "../../components/TabCategory/TabCategory";
 import UpdateCategory from "../../components/Update/UpdateCetegory/UpdateCategory";
+import UpdateProduct from "../../components/Update/UpdateProduct/UpdateProduct";
 
 function Dashboard() {
   const dispatch = useDispatch();
@@ -159,6 +160,15 @@ function Dashboard() {
             location.search.includes("tab=edit-category") && (
               <div className="dashboard-main-update-category">
                 <UpdateCategory />
+              </div>
+            )
+          }
+
+          {
+            // Update product content
+            location.search.includes("tab=edit-product") && (
+              <div className="dashboard-main-update-product">
+                <UpdateProduct />
               </div>
             )
           }
