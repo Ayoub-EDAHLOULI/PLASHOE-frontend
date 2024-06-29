@@ -44,14 +44,12 @@ function Products() {
     // Add product to cart
     dispatch(createCart({ productId: id, quantity: 1 }))
       .then((response) => {
-        console.log(response);
+        console.log("Product added to cart:", response);
+        dispatch(fetchCart());
       })
       .catch((error) => {
         console.error("Error adding product to cart:", error);
       });
-
-    //Fetch the cart
-    dispatch(fetchCart());
   };
 
   return (

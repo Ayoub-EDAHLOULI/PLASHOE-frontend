@@ -2,12 +2,13 @@ import "./SideCart.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCart } from "../../store/Actions/cartActions";
 import { updateCart } from "../../store/Actions/cartActions";
+import { removeFromCart } from "../../store/Actions/cartActions";
 import { useEffect, useState } from "react";
 
 import PropTypes from "prop-types";
 
 function SideCart({ onClose }) {
-  const cart = useSelector((state) => state.cart.cart);
+  const cart = useSelector((state) => state.cart.cart || []);
   const dispatch = useDispatch();
 
   // State for cart increment and decrement
@@ -30,6 +31,8 @@ function SideCart({ onClose }) {
       setCartQuantities(initialQuantities);
     }
   }, [cart]);
+
+  //Handle Increment
   const handleIncrement = (data) => {
     setCartQuantities((prevQuantities) => ({
       ...prevQuantities,
@@ -49,6 +52,7 @@ function SideCart({ onClose }) {
     );
   };
 
+  //Handle Decrement
   const handleDecrement = (data) => {
     setCartQuantities((prevQuantities) => ({
       ...prevQuantities,
@@ -68,6 +72,15 @@ function SideCart({ onClose }) {
     );
   };
 
+  //Handle Remove Item
+  const handleRemoveItem = (id) => {
+    dispatch(removeFromCart(id))
+      .then(() => {
+        dispatch(fetchCart());
+      })
+      .catch((err) => console.log(err));
+  };
+
   console.log("Cart", cart);
 
   return (
@@ -82,7 +95,7 @@ function SideCart({ onClose }) {
         </div>
         <div className="side-cart__content">
           <div className="side-cart__items">
-            {cart.length > 0 ? (
+            {cart && cart.length > 0 ? (
               cart.map(
                 (item) =>
                   item.product && (
@@ -104,7 +117,10 @@ function SideCart({ onClose }) {
                             </span>
                           </div>
                           <div className="right_side_add">
-                            <button className="side-cart__product-remove">
+                            <button
+                              className="side-cart__product-remove"
+                              onClick={() => handleRemoveItem(item.id)}
+                            >
                               <i className="fa-solid fa-trash-can" />
                             </button>
                             <div className="side-cart__product-quantity">

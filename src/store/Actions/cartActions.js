@@ -118,3 +118,38 @@ export const updateCart = (cart) => {
     }
   };
 };
+
+// Remove From Cart
+export const removeFromCart = (id) => {
+  return async (dispatch) => {
+    dispatch({ type: REMOVE_FROM_CART_REQUEST });
+
+    console.log("Remove From Cart", id);
+
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        dispatch({ type: REMOVE_FROM_CART_FAIL, payload: "Unauthorized" });
+        return Promise.reject("Unauthorized");
+      }
+
+      const response = await fetch(`${apiURL}/card/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      if (response.ok) {
+        dispatch({ type: REMOVE_FROM_CART_SUCCESS, payload: data.data });
+        return Promise.resolve(data.message);
+      } else {
+        dispatch({ type: REMOVE_FROM_CART_FAIL, payload: data.message });
+        return Promise.reject(data.message);
+      }
+    } catch (err) {
+      dispatch({ type: REMOVE_FROM_CART_FAIL, payload: err.message });
+      return Promise.reject(err.message);
+    }
+  };
+};
