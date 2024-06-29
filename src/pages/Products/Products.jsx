@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../store/Actions/productActions";
 import { fetchCategories } from "../../store/Actions/categoryAction";
 import { createCart } from "../../store/Actions/cartActions";
+import { fetchCart } from "../../store/Actions/cartActions";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -48,6 +49,9 @@ function Products() {
       .catch((error) => {
         console.error("Error adding product to cart:", error);
       });
+
+    //Fetch the cart
+    dispatch(fetchCart());
   };
 
   return (
