@@ -7,6 +7,9 @@ import {
   FETCH_CART_REQUEST,
   FETCH_CART_SUCCESS,
   FETCH_CART_FAIL,
+  UPDATE_CART_REQUEST,
+  UPDATE_CART_SUCCESS,
+  UPDATE_CART_FAIL,
 } from "../Actions/cartActions";
 
 const initialState = {
@@ -19,6 +22,7 @@ const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_CART_REQUEST:
     case FETCH_CART_REQUEST:
+    case UPDATE_CART_REQUEST:
       return {
         ...state,
         loading: true,
@@ -26,6 +30,7 @@ const cartReducer = (state = initialState, action) => {
       };
     case ADD_TO_CART_SUCCESS:
     case FETCH_CART_SUCCESS:
+    case UPDATE_CART_SUCCESS:
       return {
         ...state,
         cart: action.payload,
@@ -33,6 +38,7 @@ const cartReducer = (state = initialState, action) => {
       };
     case ADD_TO_CART_FAIL:
     case FETCH_CART_FAIL:
+    case UPDATE_CART_FAIL:
       return {
         ...state,
         loading: false,

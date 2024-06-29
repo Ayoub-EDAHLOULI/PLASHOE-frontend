@@ -81,3 +81,40 @@ export const fetchCart = () => {
     }
   };
 };
+
+// Update Cart
+export const updateCart = (cart) => {
+  return async (dispatch) => {
+    dispatch({ type: UPDATE_CART_REQUEST });
+
+    console.log("Cart", cart);
+
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        dispatch({ type: UPDATE_CART_FAIL, payload: "Unauthorized" });
+        return Promise.reject("Unauthorized");
+      }
+
+      const response = await fetch(`${apiURL}/card/${cart.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(cart),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        dispatch({ type: UPDATE_CART_SUCCESS, payload: data.data });
+        return Promise.resolve(data.message);
+      } else {
+        dispatch({ type: UPDATE_CART_FAIL, payload: data.message });
+        return Promise.reject(data.message);
+      }
+    } catch (err) {
+      dispatch({ type: UPDATE_CART_FAIL, payload: err.message });
+      return Promise.reject(err.message);
+    }
+  };
+};

@@ -1,6 +1,7 @@
 import "./SideCart.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCart } from "../../store/Actions/cartActions";
+import { updateCart } from "../../store/Actions/cartActions";
 import { useEffect, useState } from "react";
 
 import PropTypes from "prop-types";
@@ -29,18 +30,42 @@ function SideCart({ onClose }) {
       setCartQuantities(initialQuantities);
     }
   }, [cart]);
-  const handleIncrement = (id) => {
+  const handleIncrement = (data) => {
     setCartQuantities((prevQuantities) => ({
       ...prevQuantities,
-      [id]: Math.max(1, prevQuantities[id] + 1),
+      [data.itemId]: Math.max(1, prevQuantities[data.itemId] + 1),
     }));
+
+    dispatch(
+      updateCart({
+        id: data.itemId,
+        productId: data.productId,
+        quantity: cartQuantities[data.itemId] + 1,
+      })
+        .then(() => {
+          dispatch(fetchCart());
+        })
+        .catch((err) => console.log(err))
+    );
   };
 
-  const handleDecrement = (id) => {
+  const handleDecrement = (data) => {
     setCartQuantities((prevQuantities) => ({
       ...prevQuantities,
-      [id]: Math.max(1, prevQuantities[id] - 1),
+      [data.itemId]: Math.max(1, prevQuantities[data.itemId] - 1),
     }));
+
+    dispatch(
+      updateCart({
+        id: data.itemId,
+        productId: data.productId,
+        quantity: cartQuantities[data.itemId] - 1,
+      })
+        .then(() => {
+          dispatch(fetchCart());
+        })
+        .catch((err) => console.log(err))
+    );
   };
 
   console.log("Cart", cart);
@@ -85,14 +110,24 @@ function SideCart({ onClose }) {
                             <div className="side-cart__product-quantity">
                               <button
                                 className="side-cart__product-quantity"
-                                onClick={() => handleDecrement(item.id)}
+                                onClick={() =>
+                                  handleDecrement({
+                                    itemId: item.id,
+                                    productId: item.product.id,
+                                  })
+                                }
                               >
                                 -
                               </button>
                               <span>{cartQuantities[item.id]}</span>
                               <button
                                 className="side-cart__product-quantity"
-                                onClick={() => handleIncrement(item.id)}
+                                onClick={() =>
+                                  handleIncrement({
+                                    itemId: item.id,
+                                    productId: item.product.id,
+                                  })
+                                }
                               >
                                 +
                               </button>
