@@ -1,8 +1,7 @@
 import "./SideCart.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCart } from "../../store/Actions/cartActions";
-import { useEffect } from "react";
-import Product1 from "../../assets/Products/Men/product1.jpg";
+import { useEffect, useState } from "react";
 
 import PropTypes from "prop-types";
 
@@ -10,12 +9,38 @@ function SideCart({ onClose }) {
   const cart = useSelector((state) => state.cart.cart);
   const dispatch = useDispatch();
 
+  // State for cart increment and decrement
+  const [cartQuantities, setCartQuantities] = useState({});
+
   useEffect(() => {
     dispatch(fetchCart());
   }, [dispatch]);
 
   const handleCloseButton = () => {
     onClose();
+  };
+
+  useEffect(() => {
+    if (cart.length > 0) {
+      const initialQuantities = cart.reduce((acc, item) => {
+        acc[item.id] = item.quantity || 1;
+        return acc;
+      }, {});
+      setCartQuantities(initialQuantities);
+    }
+  }, [cart]);
+  const handleIncrement = (id) => {
+    setCartQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [id]: Math.max(1, prevQuantities[id] + 1),
+    }));
+  };
+
+  const handleDecrement = (id) => {
+    setCartQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [id]: Math.max(1, prevQuantities[id] - 1),
+    }));
   };
 
   console.log("Cart", cart);
@@ -31,137 +56,56 @@ function SideCart({ onClose }) {
           ></i>
         </div>
         <div className="side-cart__content">
-          {/* {cart?.product?.map((product) => (
-            <div key={product.id} className="side-cart__product">
-              <img src={product.image} alt={product.name} />
-              <div className="side-cart__product-info">
-                <h4>{product.name}</h4>
-                <p>{product.price}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="side-cart__footer">
-          <h4>Total: {cart?.totalPrice}</h4>
-          <button>Checkout</button>
-        </div> */}
-
           <div className="side-cart__items">
-            <div className="side-cart__item">
-              <img
-                src={Product1}
-                alt="Product Name"
-                className="side-cart__product-image"
-              />
-              <div className="side-cart__product-info">
-                <h4>Product Name</h4>
-                <div className="side-cart__product-meta">
-                  <div className="left_side">
-                    <span className="side-cart__product-price">$548.00</span>
-                    <span className="side-cart__product-category">
-                      Category : Men
-                    </span>
-                  </div>
-                  <div className="right_side_add">
-                    <button className="side-cart__product-remove">
-                      <i className="fa-solid fa-trash-can" />
-                    </button>
-                    <div className="side-cart__product-quantity">
-                      <button className="side-cart__product-quantity">-</button>
-                      <span>1</span>
-                      <button className="side-cart__product-quantity">+</button>
+            {cart.length > 0 ? (
+              cart.map(
+                (item) =>
+                  item.product && (
+                    <div className="side-cart__item" key={item.id}>
+                      <img
+                        src={item.product.image}
+                        alt={item.product.name}
+                        className="side-cart__product-image"
+                      />
+                      <div className="side-cart__product-info">
+                        <h4>{item.product.name}</h4>
+                        <div className="side-cart__product-meta">
+                          <div className="left_side">
+                            <span className="side-cart__product-price">
+                              ${item.product.price}
+                            </span>
+                            <span className="side-cart__product-category">
+                              Category : {item.product.categoryId}
+                            </span>
+                          </div>
+                          <div className="right_side_add">
+                            <button className="side-cart__product-remove">
+                              <i className="fa-solid fa-trash-can" />
+                            </button>
+                            <div className="side-cart__product-quantity">
+                              <button
+                                className="side-cart__product-quantity"
+                                onClick={() => handleDecrement(item.id)}
+                              >
+                                -
+                              </button>
+                              <span>{cartQuantities[item.id]}</span>
+                              <button
+                                className="side-cart__product-quantity"
+                                onClick={() => handleIncrement(item.id)}
+                              >
+                                +
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="side-cart__item">
-              <img
-                src={Product1}
-                alt="Product Name"
-                className="side-cart__product-image"
-              />
-              <div className="side-cart__product-info">
-                <h4>Product Name</h4>
-                <div className="side-cart__product-meta">
-                  <div className="left_side">
-                    <span className="side-cart__product-price">$548.00</span>
-                    <span className="side-cart__product-category">
-                      Category : Men
-                    </span>
-                  </div>
-                  <div className="right_side_add">
-                    <button className="side-cart__product-remove">
-                      <i className="fa-solid fa-trash-can" />
-                    </button>
-                    <div className="side-cart__product-quantity">
-                      <button className="side-cart__product-quantity">-</button>
-                      <span>1</span>
-                      <button className="side-cart__product-quantity">+</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="side-cart__item">
-              <img
-                src={Product1}
-                alt="Product Name"
-                className="side-cart__product-image"
-              />
-              <div className="side-cart__product-info">
-                <h4>Product Name</h4>
-                <div className="side-cart__product-meta">
-                  <div className="left_side">
-                    <span className="side-cart__product-price">$548.00</span>
-                    <span className="side-cart__product-category">
-                      Category : Men
-                    </span>
-                  </div>
-                  <div className="right_side_add">
-                    <button className="side-cart__product-remove">
-                      <i className="fa-solid fa-trash-can" />
-                    </button>
-                    <div className="side-cart__product-quantity">
-                      <button className="side-cart__product-quantity">-</button>
-                      <span>1</span>
-                      <button className="side-cart__product-quantity">+</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="side-cart__item">
-              <img
-                src={Product1}
-                alt="Product Name"
-                className="side-cart__product-image"
-              />
-              <div className="side-cart__product-info">
-                <h4>Product Name</h4>
-                <div className="side-cart__product-meta">
-                  <div className="left_side">
-                    <span className="side-cart__product-price">$548.00</span>
-                    <span className="side-cart__product-category">
-                      Category : Men
-                    </span>
-                  </div>
-                  <div className="right_side_add">
-                    <button className="side-cart__product-remove">
-                      <i className="fa-solid fa-trash-can" />
-                    </button>
-                    <div className="side-cart__product-quantity">
-                      <button className="side-cart__product-quantity">-</button>
-                      <span>1</span>
-                      <button className="side-cart__product-quantity">+</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+                  )
+              )
+            ) : (
+              <h4>No items in cart</h4>
+            )}
           </div>
 
           <div className="side-cart__footer">
