@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProduct } from "../../store/Actions/productActions";
 import { fetchCategories } from "../../store/Actions/categoryAction";
 import { useEffect, useState } from "react";
+import { fetchCart, createCart } from "../../store/Actions/cartActions";
 
 function DisplayProduct() {
   const location = useLocation();
@@ -16,6 +17,9 @@ function DisplayProduct() {
 
   //Local State to manage loading
   const [loading, setLoading] = useState(false);
+
+  // State for cart increment and decrement
+  const [cartQuantities, setCartQuantities] = useState(1);
 
   // Get Category Name
   const getCategoryName = (categoryId) => {
@@ -38,6 +42,25 @@ function DisplayProduct() {
     fetchData();
   }, [dispatch, productId]);
 
+  //Handle Decrement
+  const handleDecrement = () => {
+    cartQuantities > 1 && setCartQuantities(cartQuantities - 1);
+  };
+
+  //Handle Decrement
+  const handleIncrement = () => {
+    cartQuantities < 10 && setCartQuantities(cartQuantities + 1);
+  };
+
+  //Handle Add to Cart
+  const handleAddCart = () => {
+    dispatch(
+      createCart({ productId: product.id, quantity: cartQuantities })
+    ).then(() => {
+      dispatch(fetchCart());
+    });
+  };
+
   return (
     <div className="products">
       <div className="products__container">
@@ -54,7 +77,7 @@ function DisplayProduct() {
               </div>
               <h2 className="product__name">{product.name}</h2>
               <div className="product__price__rate">
-                <span className="product__price">${product.price}</span>
+                <span className="product__price">${product.price}.0</span>
                 <div className="product__rate">
                   <span className="product__rate">4.5</span>
                   <i className="fa-solid fa-star"></i>
@@ -63,14 +86,24 @@ function DisplayProduct() {
               <div className="product__quantity">
                 <span className="quantity__title">Quantity:</span>
                 <div className="quantity__buttons">
-                  <button className="quantity__btn">-</button>
-                  <span className="quantity__number">1</span>
-                  <button className="quantity__btn">+</button>
+                  <button
+                    className="quantity__btn"
+                    onClick={() => handleDecrement()}
+                  >
+                    -
+                  </button>
+                  <span className="quantity__number">{cartQuantities}</span>
+                  <button
+                    className="quantity__btn"
+                    onClick={() => handleIncrement()}
+                  >
+                    +
+                  </button>
                 </div>
               </div>
               <div className="in__stock">In Stock</div>
               <div className="cards__buttons">
-                <button>Add to Cart</button>
+                <button onClick={handleAddCart}>Add to Cart</button>
                 <button>Buy Now</button>
               </div>
               <div className="product__shipping">

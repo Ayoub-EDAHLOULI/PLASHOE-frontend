@@ -1,14 +1,18 @@
 import "./SideCart.scss";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchCart } from "../../store/Actions/cartActions";
-import { updateCart } from "../../store/Actions/cartActions";
-import { removeFromCart } from "../../store/Actions/cartActions";
+import {
+  fetchCart,
+  updateCart,
+  removeFromCart,
+} from "../../store/Actions/cartActions";
 import { useEffect, useState } from "react";
 
 import PropTypes from "prop-types";
 
 function SideCart({ onClose }) {
   const cart = useSelector((state) => state.cart.cart || []);
+  const categories = useSelector((state) => state.category.categories) || [];
+
   const dispatch = useDispatch();
 
   // State for cart increment and decrement
@@ -31,6 +35,12 @@ function SideCart({ onClose }) {
       setCartQuantities(initialQuantities);
     }
   }, [cart]);
+
+  // Get Category Name
+  const getCategoryName = (categoryId) => {
+    const category = categories.find((category) => category.id === categoryId);
+    return category ? category.name : "";
+  };
 
   //Handle Increment
   const handleIncrement = (data) => {
@@ -113,7 +123,8 @@ function SideCart({ onClose }) {
                               ${item.product.price}
                             </span>
                             <span className="side-cart__product-category">
-                              Category : {item.product.categoryId}
+                              Category :{" "}
+                              {getCategoryName(item.product.categoryId)}
                             </span>
                           </div>
                           <div className="right_side_add">
