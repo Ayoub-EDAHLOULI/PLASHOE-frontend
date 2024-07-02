@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import { checkAuthentication } from "./store/Actions/userActions";
 import { PrivateAdminRoute } from "./components/PrivateRoutes/PrivateAdminRoute";
 import DisplayProduct from "./pages/DisplayProduct/DisplayProduct";
+import Cart from "./pages/Cart/Cart";
 
 function App() {
   const dispatch = useDispatch();
@@ -46,6 +47,7 @@ function App() {
         <Route element={<PrivateAdminRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
         </Route>
+        <Route path="/cart" element={<Cart />} />
       </Routes>
       <Shipping />
       <Footer />
