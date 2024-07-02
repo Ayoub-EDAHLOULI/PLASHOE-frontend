@@ -6,10 +6,12 @@ import {
   removeFromCart,
 } from "../../store/Actions/cartActions";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
   const cart = useSelector((state) => state.cart.cart || []);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // State for cart increment and decrement
   const [cartQuantities, setCartQuantities] = useState({});
@@ -18,8 +20,6 @@ function Cart() {
   useEffect(() => {
     dispatch(fetchCart());
   }, [dispatch]);
-
-  console.log("cart", cart);
 
   // Calculate Subtotal
   const calculateSubtotal = (price, quantity) => [
@@ -192,7 +192,12 @@ function Cart() {
                 <span>Total :</span>
                 <span>${total.toFixed(2)}</span>
               </div>
-              <button className="cart__total__btn">Checkout</button>
+              <button
+                className="cart__total__btn"
+                onClick={() => navigate("/checkout")}
+              >
+                Checkout
+              </button>
             </div>
           </div>
         </div>

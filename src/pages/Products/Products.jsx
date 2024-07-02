@@ -82,7 +82,7 @@ function Products() {
                           <i className="fa-solid fa-star"></i>
                           <i className="fa-solid fa-star"></i>
                         </div>
-                        <h4>${product.price}</h4>
+                        <h4>${product.price.toFixed(2)}</h4>
                       </div>
                       <a
                         href=""

@@ -208,7 +208,13 @@ function SideCart({ onClose }) {
               >
                 View Cart
               </button>
-              <button className="side-cart__checkout-button">
+              <button
+                className="side-cart__checkout-button"
+                onClick={() => {
+                  onClose();
+                  navigate("/checkout");
+                }}
+              >
                 <i className="fa-solid fa-shopping-bag" />
                 Checkout
               </button>
