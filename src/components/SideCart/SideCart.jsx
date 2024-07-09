@@ -41,6 +41,11 @@ function SideCart({ onClose }) {
     }
   }, [cart]);
 
+  // Store updated quantities in local storage
+  useEffect(() => {
+    localStorage.setItem("cartQuantities", JSON.stringify(cartQuantities));
+  }, [cartQuantities]);
+
   // Get Category Name
   const getCategoryName = (categoryId) => {
     const category = categories.find((category) => category.id === categoryId);
@@ -56,18 +61,6 @@ function SideCart({ onClose }) {
         ...prevQuantities,
         [data.itemId]: Math.max(1, prevQuantities[data.itemId] + 1),
       }));
-
-      dispatch(
-        updateCart({
-          id: data.itemId,
-          productId: data.productId,
-          quantity: cartQuantities[data.itemId] + 1,
-        })
-      )
-        .then(() => {
-          dispatch(fetchCart());
-        })
-        .catch((err) => console.log(err));
     }
   };
 
@@ -80,20 +73,54 @@ function SideCart({ onClose }) {
         ...prevQuantities,
         [data.itemId]: Math.max(1, prevQuantities[data.itemId] - 1),
       }));
-
-      dispatch(
-        updateCart({
-          id: data.itemId,
-          productId: data.productId,
-          quantity: cartQuantities[data.itemId] - 1,
-        })
-      )
-        .then(() => {
-          dispatch(fetchCart());
-        })
-        .catch((err) => console.log(err));
     }
   };
+
+  // Handle Checkout
+  const handleCheckout = () => {
+    Object.keys(cartQuantities).forEach((itemId) => {
+      const quantity = cartQuantities[itemId];
+      const item = cart.find((item) => item.id === parseInt(itemId, 10));
+      if (item && item.quantity !== quantity) {
+        dispatch(
+          updateCart({
+            id: itemId,
+            productId: item.product.id,
+            quantity,
+          })
+        )
+          .then(() => {
+            dispatch(fetchCart());
+          })
+          .catch((err) => console.log(err));
+      }
+    });
+    onClose();
+    navigate("/checkout");
+  };
+
+  // Handle case if customer is on checkout page
+  useEffect(() => {
+    if (location.pathname === "/checkout" && Array.isArray(cart)) {
+      Object.keys(cartQuantities).forEach((itemId) => {
+        const quantity = cartQuantities[itemId];
+        const item = cart.find((item) => item.id === parseInt(itemId, 10));
+        if (item && item.quantity !== quantity) {
+          dispatch(
+            updateCart({
+              id: itemId,
+              productId: item.product.id,
+              quantity,
+            })
+          )
+            .then(() => {
+              dispatch(fetchCart());
+            })
+            .catch((err) => console.log(err));
+        }
+      });
+    }
+  }, [location.pathname, cartQuantities, dispatch, cart]);
 
   //Handle Remove Item
   const handleRemoveItem = (id) => {
@@ -210,10 +237,7 @@ function SideCart({ onClose }) {
               </button>
               <button
                 className="side-cart__checkout-button"
-                onClick={() => {
-                  onClose();
-                  navigate("/checkout");
-                }}
+                onClick={handleCheckout}
               >
                 <i className="fa-solid fa-shopping-bag" />
                 Checkout

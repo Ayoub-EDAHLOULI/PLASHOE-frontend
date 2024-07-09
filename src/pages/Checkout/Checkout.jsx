@@ -1,15 +1,41 @@
 import "./Checkout.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCart } from "../../store/Actions/cartActions";
-import { useEffect } from "react";
+import { useEffect, useState, useContext } from "react";
+import { createUserInfo } from "../../store/Actions/userInfoActions";
+import { createAddress } from "../../store/Actions/addressActions";
+import { createPayment } from "../../store/Actions/paymentActions";
+import { ToastContext } from "../../context/ToastContext";
+import { ToastContainer } from "react-toastify";
 
 function Checkout() {
   const cart = useSelector((state) => state.cart.cart || []);
   const dispatch = useDispatch();
+  const { addToast } = useContext(ToastContext);
 
   useEffect(() => {
     dispatch(fetchCart());
   }, [dispatch]);
+
+  console.log("Cart", cart);
+
+  // Form State
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    address: "",
+    apartment: "",
+    city: "",
+    state: "",
+    zip: "",
+    phone: "",
+  });
+
+  // Handle Form Change
+  const handleFormChange = (e) => {
+    e.preventDefault();
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   // Calculate Total Price
   const calculateTotalPrice = () => {
@@ -19,6 +45,63 @@ function Checkout() {
       }, 0);
     }
     return 0;
+  };
+
+  // Submit Order
+  const submitOrder = (e) => {
+    e.preventDefault();
+
+    // Check if cart is empty
+    if (!cart || cart.length === 0) {
+      console.log("Cart is empty");
+      return;
+    }
+
+    // Check if form is valid
+    if (
+      !formData.firstName ||
+      !formData.lastName ||
+      !formData.address ||
+      !formData.city ||
+      !formData.state ||
+      !formData.zip ||
+      !formData.phone
+    ) {
+      addToast("Please fill in all fields", "error");
+      return;
+    }
+
+    // Create Address
+    const addressData = {
+      address: formData.address,
+      apartment: formData.apartment,
+      city: formData.city,
+      state: formData.state,
+      zip: formData.zip,
+    };
+
+    dispatch(createAddress(addressData))
+      .then(() => {
+        console.log("Address created successfully");
+      })
+      .catch((err) => {
+        console.log("Error creating address", err);
+      });
+
+    // Create User Info
+    const userInfo = {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      phone: formData.phone,
+    };
+
+    dispatch(createUserInfo(userInfo))
+      .then(() => {
+        console.log("User Info created successfully");
+      })
+      .catch((err) => {
+        console.log("Error creating user info", err);
+      });
   };
 
   return (
@@ -36,11 +119,17 @@ function Checkout() {
                   type="text"
                   placeholder="First name"
                   className="checkout__input"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleFormChange}
                 />
                 <input
                   type="text"
                   placeholder="Last name"
                   className="checkout__input"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleFormChange}
                 />
               </div>
               <div className="form-group">
@@ -48,11 +137,17 @@ function Checkout() {
                   type="text"
                   placeholder="House number, street name"
                   className="checkout__input"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleFormChange}
                 />
                 <input
                   type="text"
                   placeholder="Apartment, suite, unit etc. (optional)"
                   className="checkout__input"
+                  name="apartment"
+                  value={formData.apartment}
+                  onChange={handleFormChange}
                 />
               </div>
               <div className="form-group">
@@ -60,8 +155,16 @@ function Checkout() {
                   type="text"
                   placeholder="City"
                   className="checkout__input"
+                  name="city"
+                  value={formData.city}
+                  onChange={handleFormChange}
                 />
-                <select className="checkout__input">
+                <select
+                  className="checkout__input"
+                  name="state"
+                  value={formData.state}
+                  onChange={handleFormChange}
+                >
                   <option value="">Select State...</option>
                   <option value="Casablanca-Settat ">Casablanca-Settat </option>
                   <option value="Béni Mellal-Khénifra">
@@ -85,6 +188,9 @@ function Checkout() {
                   type="text"
                   placeholder="Zip code"
                   className="checkout__input"
+                  name="zip"
+                  value={formData.zip}
+                  onChange={handleFormChange}
                 />
               </div>
 
@@ -93,9 +199,12 @@ function Checkout() {
                   type="tel"
                   placeholder="Phone number"
                   className="checkout__input checkout__input--full"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleFormChange}
                 />
               </div>
-              <button className="checkout__button">
+              <button className="checkout__button" onClick={submitOrder}>
                 <i className="fa-solid fa-bag-shopping" /> Place order
               </button>
             </form>
@@ -153,6 +262,8 @@ function Checkout() {
           </div>
         </div>
       </div>
+
+      <ToastContainer />
     </div>
   );
 }

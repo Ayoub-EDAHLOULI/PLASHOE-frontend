@@ -77,9 +77,7 @@ function DisplayProduct() {
               </div>
               <h2 className="product__name">{product.name}</h2>
               <div className="product__price__rate">
-                <span className="product__price">
-                  ${product.price.toFixed(2)}
-                </span>
+                <span className="product__price">${product.price || ""}</span>
                 <div className="product__rate">
                   <span className="product__rate">4.5</span>
                   <i className="fa-solid fa-star"></i>

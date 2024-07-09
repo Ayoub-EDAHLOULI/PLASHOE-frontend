@@ -15,24 +15,10 @@ function Cart() {
 
   // State for cart increment and decrement
   const [cartQuantities, setCartQuantities] = useState({});
-  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     dispatch(fetchCart());
   }, [dispatch]);
-
-  // Calculate Subtotal
-  const calculateSubtotal = (price, quantity) => [
-    (price * quantity).toFixed(2),
-  ];
-
-  // Calculate Total
-  useEffect(() => {
-    const total = (Array.isArray(cart) ? cart : []).reduce((acc, item) => {
-      return acc + item.product.price * item.quantity;
-    }, 0);
-    setTotal(total);
-  }, [cart]);
 
   // Set initial quantities
   useEffect(() => {
@@ -54,18 +40,6 @@ function Cart() {
         ...prevQuantities,
         [data.itemId]: Math.max(1, prevQuantities[data.itemId] + 1),
       }));
-
-      dispatch(
-        updateCart({
-          id: data.itemId,
-          productId: data.productId,
-          quantity: cartQuantities[data.itemId] + 1,
-        })
-      )
-        .then(() => {
-          dispatch(fetchCart());
-        })
-        .catch((err) => console.log(err));
     }
   };
 
@@ -78,18 +52,6 @@ function Cart() {
         ...prevQuantities,
         [data.itemId]: Math.max(1, prevQuantities[data.itemId] - 1),
       }));
-
-      dispatch(
-        updateCart({
-          id: data.itemId,
-          productId: data.productId,
-          quantity: cartQuantities[data.itemId] - 1,
-        })
-      )
-        .then(() => {
-          dispatch(fetchCart());
-        })
-        .catch((err) => console.log(err));
     }
   };
 
@@ -100,6 +62,38 @@ function Cart() {
         dispatch(fetchCart());
       })
       .catch((err) => console.log(err));
+  };
+
+  // Handle Checkout
+  const handleCheckout = () => {
+    // Update cart quantities
+
+    Object.keys(cartQuantities).forEach((itemId) => {
+      const quantity = cartQuantities[itemId];
+      const item = cart.find((item) => item.id === parseInt(itemId, 10));
+
+      if (item && item.quantity !== quantity) {
+        dispatch(
+          updateCart({
+            id: itemId,
+            productId: item.product.id,
+            quantity,
+          })
+        )
+          .then(() => {
+            dispatch(fetchCart());
+          })
+          .catch((err) => console.log(err));
+      }
+    });
+    navigate("/checkout");
+  };
+
+  // Calculate Total Price
+  const calculateTotalPrice = () => {
+    return (Array.isArray(cart) ? cart : []).reduce((acc, item) => {
+      return acc + item.product.price * cartQuantities[item.id];
+    }, 0);
   };
 
   return (
@@ -161,10 +155,9 @@ function Cart() {
                           </td>
                           <td>
                             $
-                            {calculateSubtotal(
-                              item.product.price,
-                              item.quantity
-                            )}
+                            {(
+                              item.product.price * cartQuantities[item.id]
+                            ).toFixed(2)}
                           </td>
                           <td>
                             <i
@@ -190,12 +183,9 @@ function Cart() {
               </div>
               <div className="cart__total__item">
                 <span>Total :</span>
-                <span>${total.toFixed(2)}</span>
+                <span>${calculateTotalPrice().toFixed(2)}</span>
               </div>
-              <button
-                className="cart__total__btn"
-                onClick={() => navigate("/checkout")}
-              >
+              <button className="cart__total__btn" onClick={handleCheckout}>
                 Checkout
               </button>
             </div>
