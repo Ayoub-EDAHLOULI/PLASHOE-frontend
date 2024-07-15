@@ -22,6 +22,7 @@ import Cart from "./pages/Cart/Cart";
 import Checkout from "./pages/Checkout/Checkout";
 import ScrollToTop from "../utils/ScrollToTop";
 import MenProducts from "./pages/MenProducts/MenProducts";
+import WomenProducts from "./pages/WomenProducts/WomenProducts";
 
 function App() {
   const dispatch = useDispatch();
@@ -49,6 +50,7 @@ function App() {
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/collection" element={<Products />} />
         <Route path="/men" element={<MenProducts />} />
+        <Route path="/women" element={<WomenProducts />} />
         <Route path="/product/:id" element={<DisplayProduct />} />
         <Route element={<PrivateAdminRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
