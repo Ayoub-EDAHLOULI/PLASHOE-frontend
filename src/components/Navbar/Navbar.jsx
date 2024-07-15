@@ -62,7 +62,7 @@ export default function Navbar() {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <a href="/">Men</a>
+              <Link to="/men">Men</Link>
             </li>
             <li>
               <a href="/">Women</a>

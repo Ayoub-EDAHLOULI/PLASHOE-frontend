@@ -21,6 +21,7 @@ import DisplayProduct from "./pages/DisplayProduct/DisplayProduct";
 import Cart from "./pages/Cart/Cart";
 import Checkout from "./pages/Checkout/Checkout";
 import ScrollToTop from "../utils/ScrollToTop";
+import MenProducts from "./pages/MenProducts/MenProducts";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/collection" element={<Products />} />
+        <Route path="/men" element={<MenProducts />} />
         <Route path="/product/:id" element={<DisplayProduct />} />
         <Route element={<PrivateAdminRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
