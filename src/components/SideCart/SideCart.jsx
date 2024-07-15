@@ -82,6 +82,7 @@ function SideCart({ onClose }) {
       const quantity = cartQuantities[itemId];
       const item = cart.find((item) => item.id === parseInt(itemId, 10));
       if (item && item.quantity !== quantity) {
+        // Update cart with new quantity
         dispatch(
           updateCart({
             id: itemId,
@@ -95,6 +96,7 @@ function SideCart({ onClose }) {
           .catch((err) => console.log(err));
       }
     });
+
     onClose();
     navigate("/checkout");
   };

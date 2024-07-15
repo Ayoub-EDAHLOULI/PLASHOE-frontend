@@ -4,23 +4,27 @@ import { fetchCart } from "../../store/Actions/cartActions";
 import { useEffect, useState, useContext } from "react";
 import { createUserInfo } from "../../store/Actions/userInfoActions";
 import { createAddress } from "../../store/Actions/addressActions";
-import { createPayment } from "../../store/Actions/paymentActions";
+import { createOrder } from "../../store/Actions/orderActions";
 import { ToastContext } from "../../context/ToastContext";
 import { ToastContainer } from "react-toastify";
 
 function Checkout() {
   const cart = useSelector((state) => state.cart.cart || []);
+  const order = useSelector((state) => state.order.order || {});
   const dispatch = useDispatch();
   const { addToast } = useContext(ToastContext);
+
+  // State to handle total price
+  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
     dispatch(fetchCart());
   }, [dispatch]);
 
-  console.log("Cart", cart);
+  console.log("Order", order);
 
   // Form State
-  const [formData, setFormData] = useState({
+  const initialFormData = {
     firstName: "",
     lastName: "",
     address: "",
@@ -29,7 +33,10 @@ function Checkout() {
     state: "",
     zip: "",
     phone: "",
-  });
+  };
+
+  // Form State
+  const [formData, setFormData] = useState(initialFormData);
 
   // Handle Form Change
   const handleFormChange = (e) => {
@@ -47,8 +54,12 @@ function Checkout() {
     return 0;
   };
 
+  useEffect(() => {
+    setTotalPrice(calculateTotalPrice());
+  }, [cart]);
+
   // Submit Order
-  const submitOrder = (e) => {
+  const submitOrder = async (e) => {
     e.preventDefault();
 
     // Check if cart is empty
@@ -68,40 +79,53 @@ function Checkout() {
       !formData.phone
     ) {
       addToast("Please fill in all fields", "error");
+
+      // Focus on the empty field
+      const emptyField = Object.keys(formData).find(
+        (key) => formData[key] === ""
+      );
+      document.querySelector(`[name=${emptyField}]`).focus();
       return;
     }
 
-    // Create Address
-    const addressData = {
-      address: formData.address,
-      apartment: formData.apartment,
-      city: formData.city,
-      state: formData.state,
-      zip: formData.zip,
-    };
+    try {
+      // Create Address
+      const addressData = {
+        streetName: formData.address,
+        appartName: formData.apartment,
+        city: formData.city,
+        state: formData.state,
+        zip: formData.zip,
+      };
 
-    dispatch(createAddress(addressData))
-      .then(() => {
-        console.log("Address created successfully");
-      })
-      .catch((err) => {
-        console.log("Error creating address", err);
-      });
+      dispatch(createAddress(addressData));
+      console.log("Address created successfully");
 
-    // Create User Info
-    const userInfo = {
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      phone: formData.phone,
-    };
+      // Create User Info
+      const userInfo = {
+        firstname: formData.firstName,
+        lastname: formData.lastName,
+        phone: formData.phone,
+      };
 
-    dispatch(createUserInfo(userInfo))
-      .then(() => {
-        console.log("User Info created successfully");
-      })
-      .catch((err) => {
-        console.log("Error creating user info", err);
-      });
+      dispatch(createUserInfo(userInfo));
+      console.log("User Info created successfully");
+
+      // Create Order and wait for the order ID
+      dispatch(createOrder({ total: Number(totalPrice) }))
+        .then(() => {
+          dispatch(fetchCart());
+        })
+        .catch((error) => {
+          console.log("Error", error);
+        });
+      addToast("Order placed successfully", "success");
+
+      // Clear Form and Fetch Cart
+      setFormData(initialFormData);
+    } catch (error) {
+      console.log("Error", error);
+    }
   };
 
   return (

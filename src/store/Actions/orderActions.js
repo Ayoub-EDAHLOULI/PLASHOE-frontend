@@ -8,6 +8,8 @@ export const createOrder = (order) => {
   return async (dispatch) => {
     dispatch({ type: CREATE_ORDER_REQUEST });
 
+    console.log("Order", order);
+
     try {
       const token = localStorage.getItem("token");
       if (!token) {
