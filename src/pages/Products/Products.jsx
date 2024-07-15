@@ -26,11 +26,19 @@ function Products() {
 
   // Handle Pagination
   const handlePreviousPage = () => {
-    setCurrentPage((prev) => prev - 1);
+    setCurrentPage((prev) => {
+      const newPage = Math.max(prev - 1, 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return newPage;
+    });
   };
 
   const handleNextPage = () => {
-    setCurrentPage((prev) => prev + 1);
+    setCurrentPage((prev) => {
+      const newPage = Math.min(prev + 1, totalPages);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return newPage;
+    });
   };
 
   // Get Category Name
@@ -69,10 +77,16 @@ function Products() {
 
   // Total Pages
   const totalPages = Math.ceil(products.length / productsPerPage);
-  const currentProducts = products.slice(
-    (currentPage - 1) * productsPerPage,
-    currentPage * productsPerPage
-  );
+  const currentProducts = Array.isArray(products)
+    ? products.slice(
+        (currentPage - 1) * productsPerPage,
+        currentPage * productsPerPage
+      )
+    : [];
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage]);
 
   return (
     <div className="products">

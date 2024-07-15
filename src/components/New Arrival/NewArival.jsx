@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./NewArrival.scss";
 
 function NewArival() {
@@ -9,7 +10,7 @@ function NewArival() {
             <h2>New Arrival</h2>
           </div>
           <div className="all_products">
-            <a href="/products">All Products</a>
+            <Link to="/collection">All Products</Link>
             <i className="fa-solid fa-arrow-right"></i>
           </div>
         </div>

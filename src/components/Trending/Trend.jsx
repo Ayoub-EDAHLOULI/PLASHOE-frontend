@@ -1,4 +1,5 @@
 import "./Trend.scss";
+import { Link } from "react-router-dom";
 
 function Trend() {
   return (
@@ -9,7 +10,7 @@ function Trend() {
             <h2>Trending Now</h2>
           </div>
           <div className="all_products">
-            <a href="/products">All Products</a>
+            <Link to="/collection">All Products</Link>
             <i className="fa-solid fa-arrow-right"></i>
           </div>
         </div>

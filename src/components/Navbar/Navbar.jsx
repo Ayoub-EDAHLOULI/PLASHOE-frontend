@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import SideCart from "../SideCart/SideCart";
+import ScrollToTop from "../../../utils/ScrollToTop";
 
 export default function Navbar() {
   const dispatch = useDispatch();
@@ -47,6 +48,8 @@ export default function Navbar() {
 
   return (
     <div className="navbar">
+      <ScrollToTop />
+
       <div className="navbar_container">
         <div className="navbar_logo">
           <Link to="/">

@@ -1,4 +1,5 @@
 import "./Categories.scss";
+import { Link } from "react-router-dom";
 
 function Categories() {
   return (
@@ -9,7 +10,7 @@ function Categories() {
             <h2>Categories</h2>
           </div>
           <div className="all_products">
-            <a href="/products">All Products</a>
+            <Link to="/collection">All Products</Link>
             <i className="fa-solid fa-arrow-right"></i>
           </div>
         </div>
