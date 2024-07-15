@@ -99,7 +99,7 @@ export default function Navbar() {
           )}
           <i className="fas fa-shopping-cart" onClick={handleToggleCart} />
           {isAuthenticated && user && user.role === "ADMIN" ? (
-            <Link to="/dashboard">
+            <Link to="/dashboard?tab=dashboard">
               <i className="fas fa-user-cog" />
             </Link>
           ) : null}
