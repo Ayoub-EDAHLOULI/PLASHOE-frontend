@@ -71,9 +71,6 @@ export default function Navbar() {
               <Link to="/collection">Collection</Link>
             </li>
             <li>
-              <a href="/">Lookbrok</a>
-            </li>
-            <li>
               <Link to="/about">About</Link>
             </li>
             <li>

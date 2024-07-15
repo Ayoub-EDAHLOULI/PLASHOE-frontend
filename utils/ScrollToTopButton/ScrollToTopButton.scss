@@ -1,0 +1,28 @@
+/* src/ScrollToTopButton.css */
+.scroll-to-top {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  z-index: 1000;
+}
+
+.scroll-to-top-button {
+  background-color: var(--primary-color-dark);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  opacity: 0.7;
+  transition: opacity 0.3s;
+
+  i {
+    font-size: 15px;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}

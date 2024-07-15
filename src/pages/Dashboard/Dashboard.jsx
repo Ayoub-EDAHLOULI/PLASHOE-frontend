@@ -51,19 +51,6 @@ function Dashboard() {
             {/* Account Page */}
             <h4 className="account-pages">Account Pages</h4>
 
-            {/* Profile */}
-            <div
-              className={`dashboard-sidebar-item ${
-                location.search.includes("tab=profile") ? "active" : ""
-              }`}
-              onClick={() => handleNavigation("profile")}
-            >
-              <div className="items">
-                <i className="fas fa-user"></i>
-                <NavLink to="/dashboard/profile ">Profile</NavLink>
-              </div>
-            </div>
-
             {/* Products */}
             <div
               className={`dashboard-sidebar-item ${
@@ -112,18 +99,6 @@ function Dashboard() {
             location.search.includes("tab=dashboard") && (
               <div className="dashboard-main-dashboard">
                 <DisplayDashboard />
-              </div>
-            )
-          }
-
-          {
-            // Profile content
-            location.search.includes("tab=profile") && (
-              <div className="dashboard-main-profile">
-                <div className="profile-image"></div>
-                <div className="profile-content">
-                  <h2>Profile</h2>
-                </div>
               </div>
             )
           }

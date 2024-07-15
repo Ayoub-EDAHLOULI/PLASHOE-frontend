@@ -23,6 +23,7 @@ import Checkout from "./pages/Checkout/Checkout";
 import ScrollToTop from "../utils/ScrollToTop";
 import MenProducts from "./pages/MenProducts/MenProducts";
 import WomenProducts from "./pages/WomenProducts/WomenProducts";
+import ScrollToTopButton from "../utils/ScrollToTopButton/ScrollToTopButton";
 
 function App() {
   const dispatch = useDispatch();
@@ -60,6 +61,8 @@ function App() {
       </Routes>
       <Shipping />
       <Footer />
+
+      <ScrollToTopButton />
     </div>
   );
 }
