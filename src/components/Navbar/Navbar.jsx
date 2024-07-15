@@ -9,8 +9,11 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  //Toggle state for cart
+  // Toggle state for cart
   const [isCartVisible, setIsCartVisible] = useState(false);
+
+  // Toggle state for mobile menu
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
 
   const user = useSelector((state) => state.user.user);
   const isAuthenticated = localStorage.getItem("isAuthenticated");
@@ -42,6 +45,12 @@ export default function Navbar() {
   const handleCloseCart = () => {
     setIsCartVisible(false);
   };
+
+  // Toggle Mobile Menu
+  const handleToggleMenu = () => {
+    setIsMenuVisible((prevState) => !prevState);
+  };
+
   useEffect(() => {
     isCartVisible ? <SideCart /> : null;
   }, [isCartVisible]);
@@ -56,7 +65,12 @@ export default function Navbar() {
             <h2>PLASHOE</h2>
           </Link>
         </div>
-        <div className="navbar__menu">
+
+        <button className="navbar_toggle" onClick={handleToggleMenu}>
+          <i className={`fas ${isMenuVisible ? "fa-times" : "fa-bars"}`}></i>
+        </button>
+
+        <div className={`navbar__menu ${isMenuVisible ? "active" : ""}`}>
           <ul>
             <li>
               <Link to="/">Home</Link>
@@ -77,29 +91,30 @@ export default function Navbar() {
               <Link to="/contact-us">Contact</Link>
             </li>
           </ul>
-        </div>
 
-        <div className="navbar__icons">
-          <i className="fas fa-search" />
-          {localStorage.getItem("token") ? (
-            <Link to="/" className="logout-container">
-              <i
-                className="fa-solid fa-arrow-right-from-bracket logout"
-                onClick={handleLogout}
-              />
-              <span className="logout-text">Logout</span>
-            </Link>
-          ) : (
-            <Link to="/login">
-              <i className="fas fa-user" />
-            </Link>
-          )}
-          <i className="fas fa-shopping-cart" onClick={handleToggleCart} />
-          {isAuthenticated && user && user.role === "ADMIN" ? (
-            <Link to="/dashboard?tab=dashboard">
-              <i className="fas fa-user-cog" />
-            </Link>
-          ) : null}
+          {/* Icons section */}
+          <div className="navbar__icons">
+            <i className="fas fa-search" />
+            {localStorage.getItem("token") ? (
+              <Link to="/" className="logout-container">
+                <i
+                  className="fa-solid fa-arrow-right-from-bracket logout"
+                  onClick={handleLogout}
+                />
+                <span className="logout-text">Logout</span>
+              </Link>
+            ) : (
+              <Link to="/login">
+                <i className="fas fa-user" />
+              </Link>
+            )}
+            <i className="fas fa-shopping-cart" onClick={handleToggleCart} />
+            {isAuthenticated && user && user.role === "ADMIN" ? (
+              <Link to="/dashboard?tab=dashboard">
+                <i className="fas fa-user-cog" />
+              </Link>
+            ) : null}
+          </div>
         </div>
       </div>
 
