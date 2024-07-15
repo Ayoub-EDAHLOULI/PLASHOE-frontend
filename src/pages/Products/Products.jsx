@@ -18,6 +18,21 @@ function Products() {
   //Local State to manage loading
   const [loading, setLoading] = useState(false);
 
+  //Current Page
+  const [currentPage, setCurrentPage] = useState(1);
+
+  //Products per page
+  const productsPerPage = 12;
+
+  // Handle Pagination
+  const handlePreviousPage = () => {
+    setCurrentPage((prev) => prev - 1);
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage((prev) => prev + 1);
+  };
+
   // Get Category Name
   const getCategoryName = (categoryId) => {
     const category = categories.find((category) => category.id === categoryId);
@@ -52,6 +67,13 @@ function Products() {
       });
   };
 
+  // Total Pages
+  const totalPages = Math.ceil(products.length / productsPerPage);
+  const currentProducts = products.slice(
+    (currentPage - 1) * productsPerPage,
+    currentPage * productsPerPage
+  );
+
   return (
     <div className="products">
       <div className="products__container">
@@ -61,8 +83,8 @@ function Products() {
         <div className="products__container__content__items">
           {loading ? (
             <h1>Loading...</h1>
-          ) : products.length > 0 ? (
-            products.map((product) => (
+          ) : currentProducts.length > 0 ? (
+            currentProducts.map((product) => (
               <Link
                 to={`/product/${product.id}`}
                 key={product.id}
@@ -99,6 +121,23 @@ function Products() {
           ) : (
             <h1>No Products</h1>
           )}
+        </div>
+
+        <div className="pagination">
+          <button
+            onClick={handlePreviousPage}
+            disabled={currentPage === 1}
+            className={currentPage === 1 ? "disable" : ""}
+          >
+            &laquo;
+          </button>
+          <button
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+            className={currentPage === totalPages ? "disable" : ""}
+          >
+            &raquo;
+          </button>
         </div>
       </div>
     </div>

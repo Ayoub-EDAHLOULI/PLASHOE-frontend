@@ -97,5 +97,36 @@
         }
       }
     }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 50px;
+      column-gap: 10px;
+
+      button {
+        width: 40px;
+        height: 40px;
+        border: none;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+        color: var(--white-color);
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color: var(--primary-color-dark);
+        }
+      }
+
+      .disable {
+        background-color: #c5c5c5;
+        color: var(--primary-color);
+        cursor: not-allowed;
+      }
+    }
   }
 }
