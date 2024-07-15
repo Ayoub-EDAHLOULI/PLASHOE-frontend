@@ -20,6 +20,7 @@ import { PrivateAdminRoute } from "./components/PrivateRoutes/PrivateAdminRoute"
 import DisplayProduct from "./pages/DisplayProduct/DisplayProduct";
 import Cart from "./pages/Cart/Cart";
 import Checkout from "./pages/Checkout/Checkout";
+import ScrollToTop from "../utils/ScrollToTop";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +35,8 @@ function App() {
 
   return (
     <div className="App">
+      <ScrollToTop />
+
       <Carousel />
       <Navbar />
       <Routes>
