@@ -8,6 +8,7 @@ import AddProduct from "../../components/AddProduct/AddProduct";
 import TabCategory from "../../components/TabCategory/TabCategory";
 import UpdateCategory from "../../components/Update/UpdateCetegory/UpdateCategory";
 import UpdateProduct from "../../components/Update/UpdateProduct/UpdateProduct";
+import DisplayDashboard from "../../components/Display Dashboard/DisplayDashboard";
 
 function Dashboard() {
   const dispatch = useDispatch();
@@ -110,8 +111,7 @@ function Dashboard() {
             // Dashboard content
             location.search.includes("tab=dashboard") && (
               <div className="dashboard-main-dashboard">
-                <h2>Dashboard</h2>
-                <p>Welcome to the dashboard</p>
+                <DisplayDashboard />
               </div>
             )
           }
