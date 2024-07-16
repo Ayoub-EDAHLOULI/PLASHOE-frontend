@@ -2,8 +2,11 @@
   display: flex;
   justify-content: center;
   margin-top: 80px;
+  width: 100%;
 
   .products__container {
+    width: 100%;
+
     .products__container__title {
       font-size: 2rem;
 
@@ -28,6 +31,7 @@
           width: 100%;
           display: flex;
           flex-direction: column;
+          flex-wrap: wrap;
           background-color: var(--white-color);
           border: 1px solid #cce7d0;
           box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.02);
@@ -126,6 +130,108 @@
         background-color: #c5c5c5;
         color: var(--primary-color);
         cursor: not-allowed;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .products {
+    .products__container {
+      .products__container__content__items {
+        .product-link {
+          width: 25%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .products {
+    .products__container {
+      .products__container__content__items {
+        .product-link {
+          width: 30%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .products {
+    .products__container {
+      .products__container__content__items {
+        .product-link {
+          width: 35%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .products {
+    .products__container {
+      min-width: 110%;
+
+      .products__container__title {
+        font-size: 1.4rem;
+      }
+
+      .products__container__content__items {
+        .product-link {
+          width: 45%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .products {
+    .products__container {
+      .products__container__title {
+        font-size: 1.2rem;
+      }
+
+      .products__container__content__items {
+        .product-link {
+          width: 80%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .products {
+    .products__container {
+      .products__container__title {
+        font-size: 1.2rem;
+      }
+
+      .products__container__content__items {
+        .product-link {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .products {
+    .products__container {
+      min-width: 125%;
+      margin: 10px;
+      padding: 0 10px;
+
+      .products__container__content__items {
+        width: 100%;
+        margin: 0;
+        padding: 0;
       }
     }
   }
