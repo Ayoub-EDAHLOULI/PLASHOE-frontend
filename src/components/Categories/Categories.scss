@@ -1,5 +1,6 @@
 .categories {
   margin: 10px 150px;
+
   .categories_container {
     display: flex;
     flex-direction: column;
@@ -88,6 +89,37 @@
       .card_three {
         background: url("../../assets/Category_Kids.jpg") no-repeat center
           center/cover;
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    .categories {
+      margin: 10px 150px; /* Restore margin for larger screens */
+    }
+
+    .categories_container {
+      .category_top_side {
+        .category_title {
+          h2 {
+            font-size: 50px; /* Restore font size for larger screens */
+          }
+        }
+      }
+
+      .category_bottom_side {
+        .card_one,
+        .card_two,
+        .card_three {
+          width: 30%; /* Adjusted width for cards on larger screens */
+          margin-bottom: 0; /* Remove bottom margin for larger screens */
+
+          .card_title {
+            h3 {
+              font-size: 30px; /* Restore font size for larger screens */
+            }
+          }
+        }
       }
     }
   }
