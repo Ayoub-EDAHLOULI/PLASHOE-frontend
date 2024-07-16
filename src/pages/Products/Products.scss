@@ -6,6 +6,8 @@
 
   .products__container {
     width: 100%;
+    background-color: var(--white-color);
+    padding: 20px;
 
     .products__container__title {
       font-size: 2rem;
@@ -182,7 +184,7 @@
 
       .products__container__content__items {
         .product-link {
-          width: 45%;
+          width: 40%;
         }
       }
     }
@@ -224,8 +226,7 @@
 @media screen and (max-width: 480px) {
   .products {
     .products__container {
-      min-width: 125%;
-      margin: 10px;
+      min-width: 100%;
       padding: 0 10px;
 
       .products__container__content__items {

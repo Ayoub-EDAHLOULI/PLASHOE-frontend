@@ -66,7 +66,7 @@ function DisplayProduct() {
   }, [productId]);
 
   return (
-    <div className="products">
+    <div className="display__products">
       <div className="products__container">
         {loading ? (
           <h1>Loading...</h1>
