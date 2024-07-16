@@ -90,3 +90,45 @@
     }
   }
 }
+
+@media (max-width: 1370px) {
+  .trend {
+    margin: 130px 100px;
+  }
+}
+
+@media (max-width: 1160px) {
+  .trend {
+    margin: 130px 50px;
+  }
+}
+
+@media (max-width: 880px) {
+  .trend_bottom_side {
+    width: 100%;
+    flex-direction: column;
+    gap: 20px;
+
+    .card_one,
+    .card_two {
+      min-width: 100%;
+      height: 400px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .trend {
+    margin: 130px 20px;
+  }
+
+  .trend_top_side {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .trend_bottom_side {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
