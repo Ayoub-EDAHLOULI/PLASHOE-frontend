@@ -345,3 +345,433 @@
     }
   }
 }
+
+@media screen and (max-width: 1400px) {
+  .about {
+    .about__container {
+      .about__dna {
+        .about__dna__container {
+          h1 {
+            font-size: 3rem;
+          }
+          .about__dna__content {
+            .about__dna__content__item {
+              padding: 1rem;
+              h2 {
+                font-size: 25px;
+              }
+
+              p {
+                font-size: 18px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 478px) {
+  .about {
+    .about__container {
+      .about_hero {
+        .about_hero__content {
+          .about_hero__text {
+            h1 {
+              font-size: 3rem;
+            }
+          }
+        }
+      }
+
+      .about__info {
+        .about__content {
+          width: 100%;
+          padding: 2rem 1rem;
+          margin: 1rem 0;
+
+          .logo {
+            h2 {
+              font-size: 35px;
+            }
+          }
+        }
+      }
+
+      .about__video {
+        .about__video__container {
+          display: block;
+          width: 100%;
+          height: auto;
+          padding: 10px;
+
+          video {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+          }
+
+          .about__video__content {
+            padding: 20px;
+            border-radius: 20px;
+
+            .about__video__content__container {
+              h2 {
+                font-size: 1.5rem;
+              }
+
+              p {
+                padding: 0 5px;
+              }
+            }
+          }
+        }
+      }
+
+      .about__dna {
+        .about__dna__container {
+          h1 {
+            font-size: 2.5rem;
+          }
+          .about__dna__content {
+            flex-direction: column;
+
+            .about__dna__content__item {
+              padding: 0;
+              h2 {
+                font-size: 20px;
+              }
+
+              p {
+                font-size: 15px;
+              }
+            }
+          }
+        }
+      }
+
+      .about__ceo {
+        .about__ceo__container {
+          padding: 20px;
+
+          q {
+            font-size: 1rem;
+          }
+
+          h5 {
+            font-size: 15px;
+          }
+        }
+      }
+
+      .about__newsletter {
+        margin-bottom: 280px;
+
+        .about__newsletter__container {
+          display: block;
+          width: 100%;
+
+          .Image {
+            width: 100%;
+            height: 50%;
+            border-radius: 0;
+          }
+
+          .about__newsletter__content {
+            width: 100%;
+            padding: 20px;
+            border-radius: 0;
+            h1 {
+              font-size: 2rem;
+            }
+            p {
+              font-size: 1rem;
+            }
+            .about__newsletter__form {
+              input {
+                padding: 10px;
+              }
+              button {
+                padding: 8px;
+              }
+              h6 {
+                font-size: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .about {
+    .about__container {
+      .about_hero {
+        .about_hero__content {
+          .about_hero__text {
+            h1 {
+              font-size: 3rem;
+            }
+          }
+        }
+      }
+
+      .about__info {
+        .about__content {
+          width: 100%;
+          padding: 2rem 1rem;
+          margin: 1rem 0;
+
+          .logo {
+            h2 {
+              font-size: 35px;
+            }
+          }
+        }
+      }
+
+      .about__video {
+        .about__video__container {
+          display: block;
+          width: 100%;
+          height: auto;
+          padding: 10px;
+
+          video {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+          }
+
+          .about__video__content {
+            padding: 20px;
+            border-radius: 20px;
+
+            .about__video__content__container {
+              h2 {
+                font-size: 1.5rem;
+              }
+
+              p {
+                padding: 0 5px;
+              }
+            }
+          }
+        }
+      }
+
+      .about__dna {
+        .about__dna__container {
+          h1 {
+            font-size: 2.5rem;
+          }
+          .about__dna__content {
+            flex-direction: column;
+
+            .about__dna__content__item {
+              padding: 0;
+              h2 {
+                font-size: 20px;
+              }
+
+              p {
+                font-size: 15px;
+              }
+            }
+          }
+        }
+      }
+
+      .about__ceo {
+        .about__ceo__container {
+          padding: 20px;
+
+          q {
+            font-size: 1.2rem;
+          }
+
+          h5 {
+            font-size: 15px;
+          }
+        }
+      }
+
+      .about__newsletter {
+        margin-bottom: 280px;
+
+        .about__newsletter__container {
+          display: block;
+          width: 100%;
+
+          .Image {
+            width: 100%;
+            height: 50%;
+            border-radius: 0;
+          }
+
+          .about__newsletter__content {
+            width: 100%;
+            padding: 20px;
+            border-radius: 0;
+            h1 {
+              font-size: 2rem;
+            }
+            p {
+              font-size: 1rem;
+            }
+            .about__newsletter__form {
+              input {
+                padding: 10px;
+              }
+              button {
+                padding: 8px;
+              }
+              h6 {
+                font-size: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 947px) {
+  .about {
+    .about__container {
+      .about_hero {
+        .about_hero__content {
+          .about_hero__text {
+            h1 {
+              font-size: 4rem;
+            }
+          }
+        }
+      }
+
+      .about__info {
+        .about__content {
+          width: 100%;
+          padding: 3rem 2rem;
+          margin: 1rem 0;
+
+          .logo {
+            h2 {
+              font-size: 40px;
+            }
+          }
+        }
+      }
+
+      .about__video {
+        .about__video__container {
+          display: block;
+          width: 100%;
+          height: auto;
+          padding: 20px;
+
+          video {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+          }
+
+          .about__video__content {
+            padding: 30px;
+            border-radius: 20px;
+
+            .about__video__content__container {
+              h2 {
+                font-size: 2rem;
+              }
+
+              p {
+                padding: 0 10px;
+              }
+            }
+          }
+        }
+      }
+
+      .about__dna {
+        .about__dna__container {
+          h1 {
+            font-size: 3rem;
+          }
+          .about__dna__content {
+            flex-direction: column;
+
+            .about__dna__content__item {
+              padding: 1rem;
+              h2 {
+                font-size: 25px;
+              }
+
+              p {
+                font-size: 18px;
+              }
+            }
+          }
+        }
+      }
+
+      .about__ceo {
+        .about__ceo__container {
+          padding: 30px;
+
+          q {
+            font-size: 1.2rem;
+          }
+
+          h5 {
+            font-size: 17px;
+          }
+        }
+      }
+
+      .about__newsletter {
+        margin-bottom: 280px;
+
+        .about__newsletter__container {
+          display: block;
+          width: 100%;
+
+          .Image {
+            width: 100%;
+            height: 50%;
+            border-radius: 0;
+          }
+
+          .about__newsletter__content {
+            height: 500px;
+            width: 100%;
+            padding: 30px 10px 40px 20px;
+            border-radius: 0;
+
+            h1 {
+              font-size: 2.2rem;
+            }
+            p {
+              font-size: 1.1rem;
+            }
+            .about__newsletter__form {
+              input {
+                padding: 12px;
+              }
+              button {
+                padding: 10px;
+              }
+              h6 {
+                font-size: 11px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

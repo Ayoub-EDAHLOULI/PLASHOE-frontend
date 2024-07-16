@@ -1,4 +1,3 @@
-// src/components/ImageTextSlider.scss
 .image-text-slider {
   display: flex;
   align-items: center;
@@ -58,6 +57,87 @@
         cursor: pointer;
         border-radius: 50%;
         font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .image-text-slider {
+    margin-top: 100px;
+
+    .images {
+      width: 400px;
+      height: 500px;
+    }
+
+    .text {
+      h2 {
+        font-size: 50px;
+        line-height: 50px;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .image-text-slider {
+    max-width: 90%;
+  }
+}
+
+@media screen and (max-width: 1240px) {
+  .image-text-slider {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+
+    .images {
+      width: 100%;
+      height: 400px;
+    }
+
+    .text {
+      margin-left: 0;
+      margin-top: 20px;
+      text-align: center;
+
+      h2 {
+        font-size: 40px;
+        line-height: 40px;
+      }
+
+      p {
+        font-size: 0.9rem;
+      }
+
+      .navigation {
+        justify-content: center;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .image-text-slider {
+    margin-top: 50px;
+
+    .images {
+      height: 300px;
+    }
+
+    .text {
+      h2 {
+        font-size: 30px;
+        line-height: 30px;
+      }
+
+      p {
+        font-size: 0.8rem;
       }
     }
   }
