@@ -77,3 +77,54 @@
     }
   }
 }
+
+// Media Queries for Mobile
+
+@media screen and (max-width: 768px) {
+  .display-dashboard {
+    margin: 30px 10px;
+
+    .display-dashboard-container {
+      .display-dashboard-content {
+        .display-dashboard-content-item {
+          width: 45%;
+        }
+      }
+
+      .display-dashboard-chart {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .display-dashboard {
+    margin: 20px 5px;
+
+    .display-dashboard-container {
+      .display-dashboard-content {
+        .display-dashboard-content-item {
+          width: 100%;
+          margin: 5px 0;
+          padding: 10px;
+          height: auto;
+
+          .display-dashboard-content-item-header {
+            font-size: 1rem;
+          }
+
+          p {
+            font-size: 1rem;
+          }
+        }
+      }
+
+      .display-dashboard-chart {
+        width: 100%;
+        margin-top: 1rem;
+        padding: 0.5rem;
+      }
+    }
+  }
+}

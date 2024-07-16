@@ -132,3 +132,103 @@
     }
   }
 }
+
+// Media Queries for Mobile
+
+@media screen and (max-width: 768px) {
+  .add-category {
+    padding: 0 1rem;
+
+    .form-group {
+      flex-direction: column;
+      align-items: flex-start;
+      row-gap: 1rem;
+
+      input {
+        width: 100%;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+
+    .tab-products-table {
+      thead {
+        .tab-products-table-header {
+          flex-direction: column;
+          gap: 10px;
+          padding: 10px 0;
+        }
+      }
+
+      tbody {
+        .tab-products-table-body {
+          flex-direction: column;
+          gap: 20px;
+          padding: 10px 0;
+
+          td {
+            flex-direction: column;
+            margin-left: 0;
+
+            button {
+              width: 100%;
+              margin: 5px 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .add-category {
+    padding: 0 0.5rem;
+
+    .top_side {
+      h2 {
+        font-size: 1.4rem;
+      }
+    }
+
+    .form-group {
+      row-gap: 0.5rem;
+
+      label {
+        font-size: 1rem;
+      }
+
+      input {
+        font-size: 0.9rem;
+      }
+
+      button {
+        font-size: 0.9rem;
+        margin-top: 10px;
+      }
+    }
+
+    .tab-products-table {
+      thead {
+        .tab-products-table-header {
+          gap: 5px;
+        }
+      }
+
+      tbody {
+        .tab-products-table-body {
+          gap: 10px;
+
+          td {
+            button {
+              font-size: 0.8rem;
+              width: 80px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
