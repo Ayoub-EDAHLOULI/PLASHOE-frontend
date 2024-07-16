@@ -195,3 +195,136 @@
     }
   }
 }
+
+// Media Queries
+
+// For devices with max-width of 1024px
+@media screen and (max-width: 1024px) {
+  .dashboard {
+    .dashboard-container {
+      flex-direction: column;
+      align-items: center;
+
+      .dashboard-sidebar {
+        width: 100%;
+        height: auto;
+        margin: 0 0 20px 0;
+
+        .dashboard-sidebar-header {
+          h2 {
+            font-size: 1.75rem;
+          }
+        }
+
+        .dashboard-sidebar-items {
+          h4 {
+            font-size: 1.25rem;
+          }
+
+          .dashboard-sidebar-item {
+            width: 100%;
+          }
+        }
+      }
+
+      .dashboard-main {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}
+
+// For devices with max-width of 768px
+@media screen and (max-width: 768px) {
+  .dashboard {
+    .dashboard-container {
+      .dashboard-sidebar {
+        padding: 20px 0;
+
+        .dashboard-sidebar-header {
+          h2 {
+            font-size: 1.5rem;
+          }
+        }
+
+        .dashboard-sidebar-items {
+          h4 {
+            font-size: 1rem;
+          }
+
+          .dashboard-sidebar-item {
+            padding: 8px;
+          }
+        }
+      }
+
+      .dashboard-main {
+        .dashboard-main-profile {
+          .profile-image {
+            height: 200px;
+          }
+
+          .profile-content {
+            h2 {
+              font-size: 1.75rem;
+              bottom: 120px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// For devices with max-width of 480px
+@media screen and (max-width: 480px) {
+  .dashboard {
+    height: auto;
+    padding: 20px 10px;
+
+    .dashboard-container {
+      .dashboard-sidebar {
+        padding: 10px 0;
+
+        .dashboard-sidebar-header {
+          h2 {
+            font-size: 1.25rem;
+          }
+        }
+
+        .dashboard-sidebar-items {
+          row-gap: 15px;
+
+          h4 {
+            font-size: 0.9rem;
+          }
+
+          .dashboard-sidebar-item {
+            padding: 6px;
+            font-size: 0.9rem;
+
+            i {
+              margin-right: 5px;
+            }
+          }
+        }
+      }
+
+      .dashboard-main {
+        .dashboard-main-profile {
+          .profile-image {
+            height: 150px;
+          }
+
+          .profile-content {
+            h2 {
+              font-size: 1.5rem;
+              bottom: 80px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
