@@ -150,3 +150,177 @@
     }
   }
 }
+
+// Media Queries
+
+@media screen and (max-width: 1420px) {
+  .contact-us {
+    .contactUs__container {
+      padding: 80px 40px 20px 40px;
+
+      .contactUs__left {
+        .contactUs__left__header {
+          h1 {
+            font-size: 35px;
+          }
+        }
+
+        form {
+          input {
+            width: 300px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// For devices with max-width of 947px
+@media screen and (max-width: 1220px) {
+  .contact-us {
+    .contactUs__bg {
+      h2 {
+        font-size: 4rem;
+      }
+    }
+
+    .contactUs__container {
+      flex-direction: column;
+      padding: 50px 20px;
+
+      .contactUs__left,
+      .contactUs__right {
+        width: 100%;
+      }
+
+      .contactUs__left {
+        .contactUs__left__header {
+          h1 {
+            font-size: 35px;
+          }
+        }
+
+        form {
+          .inputRowOne,
+          .inputRowTwo {
+            flex-direction: column;
+            column-gap: 0;
+
+            input {
+              width: 100%;
+            }
+          }
+        }
+      }
+
+      .contactUs__right {
+        height: 60vh;
+        margin-top: 50px;
+
+        .background {
+          top: 10px;
+          right: 10px;
+        }
+      }
+    }
+  }
+}
+
+// For devices with max-width of 768px
+@media screen and (max-width: 768px) {
+  .contact-us {
+    .contactUs__bg {
+      h2 {
+        font-size: 3rem;
+      }
+    }
+
+    .contactUs__container {
+      padding: 40px 20px;
+
+      .contactUs__left {
+        .contactUs__left__header {
+          h1 {
+            font-size: 30px;
+          }
+        }
+
+        form {
+          .inputRowOne,
+          .inputRowTwo {
+            flex-direction: column;
+            column-gap: 0;
+          }
+
+          .message {
+            flex-direction: column;
+          }
+
+          button {
+            width: 100%;
+          }
+        }
+      }
+
+      .contactUs__right {
+        height: 50vh;
+        margin-top: 30px;
+      }
+    }
+  }
+}
+
+// For devices with max-width of 478px
+@media screen and (max-width: 478px) {
+  .contact-us {
+    .contactUs__bg {
+      height: 40vh;
+
+      h2 {
+        font-size: 2rem;
+      }
+    }
+
+    .contactUs__container {
+      padding: 30px 10px;
+
+      .contactUs__left {
+        .contactUs__left__header {
+          h1 {
+            font-size: 25px;
+          }
+        }
+
+        form {
+          .inputRowOne,
+          .inputRowTwo,
+          .message {
+            flex-direction: column;
+            column-gap: 0;
+          }
+
+          input,
+          textarea {
+            width: 100%;
+            padding: 10px;
+          }
+
+          button {
+            padding: 10px;
+            width: 100%;
+          }
+        }
+      }
+
+      .contactUs__right {
+        height: 40vh;
+        margin-top: 30px;
+
+        .background {
+          top: 5px;
+          right: 5px;
+        }
+      }
+    }
+  }
+}
