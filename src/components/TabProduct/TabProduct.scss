@@ -31,16 +31,20 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
 
-      //Search bar
+      // Search bar
       .search {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        position: relative;
 
         .searchInput {
           input {
-            width: 430px;
+            width: 100%;
+            max-width: 430px;
             height: 45px;
             border: none;
             border-radius: 5px;
@@ -67,11 +71,12 @@
         }
       }
 
-      //Filter
+      // Filter and Sort
       .tab-products-filter,
       .tab-products-sort {
         select {
-          width: 200px;
+          width: 100%;
+          max-width: 200px;
           height: 45px;
           border: none;
           border-radius: 5px;
@@ -94,7 +99,8 @@
 
       .add-product-button {
         button {
-          width: 150px;
+          width: 100%;
+          max-width: 150px;
           height: 45px;
           border: none;
           border-radius: 15px;
@@ -211,6 +217,133 @@
         background-color: #c5c5c5;
         color: var(--primary-color);
         cursor: not-allowed;
+      }
+    }
+  }
+}
+
+// Media Queries
+
+// For devices with max-width of 1024px
+@media screen and (max-width: 1024px) {
+  .tab-products {
+    margin: 1rem;
+    padding: 0 1rem;
+
+    .tab-products-header {
+      h2 {
+        font-size: 1.6rem;
+      }
+    }
+
+    .tab-products-content {
+      gap: 15px;
+
+      .tab-products-top {
+        .searchInput {
+          input {
+            max-width: 350px;
+          }
+        }
+
+        .tab-products-filter select,
+        .tab-products-sort select {
+          max-width: 180px;
+        }
+
+        .add-product-button button {
+          max-width: 130px;
+        }
+      }
+    }
+  }
+}
+
+// For devices with max-width of 768px
+@media screen and (max-width: 768px) {
+  .tab-products {
+    margin: 0.5rem;
+    padding: 0 0.5rem;
+
+    .tab-products-header {
+      h2 {
+        font-size: 1.4rem;
+      }
+    }
+
+    .tab-products-content {
+      gap: 10px;
+
+      .tab-products-top {
+        flex-direction: column;
+        align-items: flex-start;
+
+        .searchInput {
+          input {
+            max-width: 300px;
+          }
+        }
+
+        .tab-products-filter select,
+        .tab-products-sort select {
+          max-width: 160px;
+        }
+
+        .add-product-button button {
+          max-width: 120px;
+        }
+      }
+    }
+  }
+}
+
+// For devices with max-width of 480px
+@media screen and (max-width: 480px) {
+  .tab-products {
+    margin: 0.5rem;
+    padding: 0 0.5rem;
+
+    .tab-products-header {
+      h2 {
+        font-size: 1.2rem;
+      }
+    }
+
+    .tab-products-content {
+      gap: 5px;
+
+      .tab-products-top {
+        flex-direction: column;
+        align-items: flex-start;
+
+        .searchInput {
+          input {
+            min-width: 320px;
+          }
+        }
+
+        .tab-products-filter select,
+        .tab-products-sort select {
+          min-width: 320px;
+        }
+
+        .add-product-button button {
+          min-width: 320px;
+        }
+      }
+
+      .tab-products-table thead .tab-products-table-header,
+      .tab-products-table tbody .tab-products-table-body {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+    }
+
+    .pagination {
+      button {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
       }
     }
   }
