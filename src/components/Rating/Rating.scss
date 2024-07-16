@@ -100,4 +100,65 @@
       }
     }
   }
+
+  @media (max-width: 768px) {
+    .rating__container__title {
+      h1 {
+        font-size: 2rem;
+      }
+    }
+
+    .rating__container__content {
+      flex-direction: column;
+      align-items: center;
+      row-gap: 30px;
+
+      .ratingOne,
+      .ratingTwo,
+      .ratingThree {
+        width: 90%;
+        margin: 1rem 0;
+
+        .content {
+          .content__text {
+            font-size: 0.9rem;
+          }
+
+          .content__info {
+            h1 {
+              font-size: 0.75rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .rating__container__title {
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
+
+    .rating__container__content {
+      .ratingOne,
+      .ratingTwo,
+      .ratingThree {
+        padding: 1.5rem;
+
+        .content {
+          .content__text {
+            font-size: 0.8rem;
+          }
+
+          .content__info {
+            h1 {
+              font-size: 0.7rem;
+            }
+          }
+        }
+      }
+    }
+  }
 }
