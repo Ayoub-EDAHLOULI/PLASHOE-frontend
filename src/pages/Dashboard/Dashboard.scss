@@ -201,6 +201,7 @@
 // For devices with max-width of 1024px
 @media screen and (max-width: 1024px) {
   .dashboard {
+    margin-top: 50px;
     .dashboard-container {
       flex-direction: column;
       align-items: center;
