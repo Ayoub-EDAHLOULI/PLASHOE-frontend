@@ -92,35 +92,47 @@
       }
     }
   }
+}
 
-  @media (min-width: 768px) {
-    .categories {
-      margin: 10px 150px; /* Restore margin for larger screens */
+@media (max-width: 1370px) {
+  .categories {
+    margin: 10px 100px;
+  }
+}
+
+@media (max-width: 1160px) {
+  .categories {
+    margin: 10px 50px;
+  }
+}
+
+@media (max-width: 880px) {
+  .category_bottom_side {
+    width: 100%;
+    flex-direction: column;
+    gap: 20px;
+
+    .card_one,
+    .card_two,
+    .card_three {
+      min-width: 100%;
+      height: 400px;
     }
+  }
+}
 
-    .categories_container {
-      .category_top_side {
-        .category_title {
-          h2 {
-            font-size: 50px; /* Restore font size for larger screens */
-          }
-        }
-      }
+@media (max-width: 480px) {
+  .categories {
+    margin: 10px 20px;
+  }
 
-      .category_bottom_side {
-        .card_one,
-        .card_two,
-        .card_three {
-          width: 30%; /* Adjusted width for cards on larger screens */
-          margin-bottom: 0; /* Remove bottom margin for larger screens */
+  .category_top_side {
+    flex-direction: column;
+    gap: 20px;
+  }
 
-          .card_title {
-            h3 {
-              font-size: 30px; /* Restore font size for larger screens */
-            }
-          }
-        }
-      }
-    }
+  .category_bottom_side {
+    flex-direction: column;
+    gap: 20px;
   }
 }
