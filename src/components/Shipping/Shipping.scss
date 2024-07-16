@@ -44,4 +44,83 @@
       }
     }
   }
+
+  @media (max-width: 1200px) {
+    padding: 0 30px;
+
+    .about__shipping__content {
+      width: 100%;
+      flex-wrap: wrap;
+
+      .content__item {
+        width: 45%;
+        margin: 1rem 0;
+
+        .content__item__text {
+          h2 {
+            font-size: 1.1rem;
+          }
+
+          p {
+            font-size: 0.9rem;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 0 20px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+
+    .about__shipping__content {
+      flex-direction: column;
+
+      .content__item {
+        width: 90%;
+        margin: 1rem 0;
+
+        i {
+          font-size: 1.3rem;
+        }
+
+        .content__item__text {
+          h2 {
+            font-size: 1rem;
+          }
+
+          p {
+            font-size: 0.85rem;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 10px;
+    margin-top: 80px;
+    margin-bottom: 80px;
+
+    .about__shipping__content {
+      .content__item {
+        width: 100%;
+
+        i {
+          font-size: 1.2rem;
+        }
+
+        .content__item__text {
+          h2 {
+            font-size: 0.9rem;
+          }
+
+          p {
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
 }
