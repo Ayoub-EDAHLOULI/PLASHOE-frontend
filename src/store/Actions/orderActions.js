@@ -18,7 +18,7 @@ export const createOrder = (order) => {
         return Promise.reject("Token not found");
       }
 
-      const response = await fetch(`${apiURL}/orders`, {
+      const response = await fetch(`${apiURL}/order`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
